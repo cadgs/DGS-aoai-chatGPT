@@ -7,6 +7,8 @@
     background: #FFFFFF;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.14), 0px 0px 2px rgba(0, 0, 0, 0.12);
     border-radius: 5.419px;
+    background-color: var(--ask-background-color);
+    color: var(--primary-text-color);
 }
 
 .answerText {
@@ -42,6 +44,8 @@
 .answerDisclaimerContainer {
     justify-content: center;
     display: flex;
+    background-color: var(--ask-background-color);
+    color: var(--primary-text-color);
 }
 
 .answerDisclaimer {

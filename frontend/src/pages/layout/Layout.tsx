@@ -192,11 +192,8 @@ const Layout = () => {
                   <li>
                     <b>DO NOT</b> install or use any generative artificial
                     intelligence (or GenAI) tool other than
-                    <a
-                      href="https://chatdev.apps.dgs.ca.gov/"
-                      className={styles.link}
-                    >
-                      aichat.dgs.ca.gov
+                    <a href="https://chat.dgs.ca.gov/" className={styles.link}>
+                      chat.dgs.ca.gov
                     </a>
                     on any devices issued by DGS or for any DGS business use.
                   </li>
