@@ -1061,7 +1061,6 @@ async def update_message():
         logging.exception("Exception in /history/message_feedback")
         return jsonify({"error": str(e)}), 500
 
-
 @bp.route("/history/delete", methods=["DELETE"])
 async def delete_conversation():
     ## get the user id from the request headers
