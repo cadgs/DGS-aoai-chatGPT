@@ -1,0 +1,20 @@
+{
+  "name": "sample-app-aoai-chatgpt",
+  "version": "1.0.0",
+  "description": "This repo contains sample code for a simple chat webapp that integrates with Azure OpenAI. Note: some portions of the app use preview APIs.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fluentui/react-components": "^9.48.0",
+    "react-components": "^0.5.1",
+    "react-modal": "^3.16.1",
+    "use-local-storage": "^3.0.0"
+  }
+}

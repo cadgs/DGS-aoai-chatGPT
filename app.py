@@ -38,16 +38,17 @@ MINIMUM_SUPPORTED_AZURE_OPENAI_PREVIEW_API_VERSION = "2024-02-15-preview"
 load_dotenv()
 
 # UI configuration (optional)
-UI_TITLE = os.environ.get("UI_TITLE") or "Contoso"
+UI_TITLE = os.environ.get("UI_TITLE") or "DGS AI Chat"
 UI_LOGO = os.environ.get("UI_LOGO")
 UI_CHAT_LOGO = os.environ.get("UI_CHAT_LOGO")
-UI_CHAT_TITLE = os.environ.get("UI_CHAT_TITLE") or "Start chatting"
+UI_CHAT_TITLE = os.environ.get("UI_CHAT_TITLE") or "DGS AI Chat"
 UI_CHAT_DESCRIPTION = (
     os.environ.get("UI_CHAT_DESCRIPTION")
-    or "This chatbot is configured to answer your questions"
+    or "This chatbot is hosted in a private cloud with the OpenAI's GPT model - From App."
 )
-UI_FAVICON = os.environ.get("UI_FAVICON") or "/favicon.ico"
+UI_FAVICON = os.environ.get("UI_FAVICON") or "/dgs_logo.png"
 UI_SHOW_SHARE_BUTTON = os.environ.get("UI_SHOW_SHARE_BUTTON", "true").lower() == "true"
+UI_SHOW_FEEDBACK_BUTTON = os.environ.get("UI_SHOW_FEEDBACK_BUTTON", "true").lower() == "true"
 
 
 def create_app():
@@ -65,6 +66,14 @@ async def index():
 @bp.route("/favicon.ico")
 async def favicon():
     return await bp.send_static_file("favicon.ico")
+
+@bp.route("/dgs_logo.jpg")
+async def dgs_logo():
+    return await bp.send_static_file("dgs_logo.jpg")
+
+@bp.route("/dgs_chat_logo.png")
+async def dgs_chat_logo():
+    return await bp.send_static_file("dgs_chat_logo.png")
 
 
 @bp.route("/assets/<path:path>")
@@ -243,9 +252,6 @@ PROMPTFLOW_REQUEST_FIELD_NAME = os.environ.get("PROMPTFLOW_REQUEST_FIELD_NAME", 
 PROMPTFLOW_RESPONSE_FIELD_NAME = os.environ.get(
     "PROMPTFLOW_RESPONSE_FIELD_NAME", "reply"
 )
-PROMPTFLOW_CITATIONS_FIELD_NAME = os.environ.get(
-    "PROMPTFLOW_CITATIONS_FIELD_NAME", "documents"
-)
 # Frontend Settings via Environment Variables
 AUTH_ENABLED = os.environ.get("AUTH_ENABLED", "true").lower() == "true"
 CHAT_HISTORY_ENABLED = (
@@ -264,6 +270,7 @@ frontend_settings = {
         "chat_title": UI_CHAT_TITLE,
         "chat_description": UI_CHAT_DESCRIPTION,
         "show_share_button": UI_SHOW_SHARE_BUTTON,
+        "show_feedback_button": UI_SHOW_FEEDBACK_BUTTON,
     },
     "sanitize_answer": SANITIZE_ANSWER,
 }
@@ -849,7 +856,7 @@ async def complete_chat_request(request_body):
         response = await promptflow_request(request_body)
         history_metadata = request_body.get("history_metadata", {})
         return format_pf_non_streaming_response(
-            response, history_metadata, PROMPTFLOW_RESPONSE_FIELD_NAME, PROMPTFLOW_CITATIONS_FIELD_NAME
+            response, history_metadata, PROMPTFLOW_RESPONSE_FIELD_NAME
         )
     else:
         response, apim_request_id = await send_chat_request(request_body)
@@ -1060,6 +1067,7 @@ async def update_message():
     except Exception as e:
         logging.exception("Exception in /history/message_feedback")
         return jsonify({"error": str(e)}), 500
+
 
 @bp.route("/history/delete", methods=["DELETE"])
 async def delete_conversation():

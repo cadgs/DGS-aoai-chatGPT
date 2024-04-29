@@ -34,6 +34,30 @@
     border: 1px solid #D1D1D1;
   }
 
+  .feedbackButtonRoot {
+    width: 100px;
+    height: 32px;
+    border-radius: 4px;
+    background: radial-gradient(109.81% 107.82% at 100.1% 90.19%, #0F6CBD 33.63%, #2D87C3 70.31%, #8DDDD8 100%);
+    padding: 5px 12px;
+    cursor: pointer;
+  }
+
+  .feedbackButtonRoot:hover {
+    background: linear-gradient(135deg, #0F6CBD 0%, #2D87C3 51.04%, #8DDDD8 100%);
+  }
+  
+  .feedbackButtonRoot span {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: #FFFFFF;
+  }
+
+  .feedbackButtonRoot i, .feedbackButtonRoot:hover i {
+    color: #FFFFFF !important;
+  }
+
   @media (max-width: 480px) {
     .shareButtonRoot {
       width: auto; 
@@ -44,4 +68,9 @@
       width: auto;
       padding: 0 8px  
     }
+
+    .feedbackButtonRoot {
+      width: auto; 
+      padding: 5px 8px; 
+    }    
   }
