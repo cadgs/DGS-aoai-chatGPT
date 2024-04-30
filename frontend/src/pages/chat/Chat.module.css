@@ -76,7 +76,7 @@
     flex-direction: column;
     margin-top: 24px;
     color: var(--primary-text-color);
-    background: var(--ask-background-color);
+    background: var(--chat-background-color);
 }
 
 .chatMessageUser {
@@ -84,13 +84,13 @@
     justify-content: flex-end;
     margin-bottom: 12px;
     color: var(--primary-text-color);
-    background: var(--ask-background-color);
+    background: var(--chat-background-color);
 }
 
 .chatMessageUserMessage {
     display: flex;
     padding: 20px;
-    background: var(--chat-background-color); /*#EDF5FD;*/
+    background: var(--ask-background-color); /*#EDF5FD;*/
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.14), 0px 0px 2px rgba(0, 0, 0, 0.12);
     font-style: normal;
@@ -110,7 +110,7 @@
     max-width: 80%;
     display: flex;
     color: var(--primary-text-color);
-    background: var(--ask-background-color);
+    background: var(--chat-background-color);
 }
 
 .chatMessageError {

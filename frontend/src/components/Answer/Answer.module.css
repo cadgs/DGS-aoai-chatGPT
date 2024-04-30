@@ -16,7 +16,7 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
-    color: #323130;
+    color: var(--primary-text-color); /*#323130;*/
     flex: none;
     order: 1;
     align-self: stretch;
