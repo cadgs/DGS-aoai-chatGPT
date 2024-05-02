@@ -100,10 +100,6 @@ const Layout = () => {
 
   return (
     <div className={styles.layout} data-theme={isDark ? "dark" : "light"}>
-      <ThemeToggler
-        isChecked={isDark}
-        handleChange={() => setIsDark(!isDark)}
-      />
       <header className={styles.header} role={"banner"}>
         <Stack
           horizontal

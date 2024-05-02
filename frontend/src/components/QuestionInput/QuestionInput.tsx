@@ -24,7 +24,7 @@ export const QuestionInput = ({
   const [question, setQuestion] = useState<string>("");
 
   const appStateContext = useContext(AppStateContext);
-  const isDrak: boolean | undefined = appStateContext?.state.isDarkMode;
+  const isDark: boolean | undefined = appStateContext?.state.isDarkMode;
 
   const sendQuestion = () => {
     if (disabled || !question.trim()) {
@@ -62,11 +62,10 @@ export const QuestionInput = ({
 
   const sendQuestionDisabled = disabled || !question.trim();
 
-  /*
-  const inputStyle = {
+  const textFieldStyles = {
     background: isDark ? "#616161" : "#f6f6f6",
     color: isDark ? "#ffffff" : "#060606",
-  };*/
+  };
 
   return (
     <Stack horizontal className={styles.questionInputContainer}>
@@ -79,12 +78,7 @@ export const QuestionInput = ({
         value={question}
         onChange={onQuestionChange}
         onKeyDown={onEnterPress}
-        styles={{
-          fieldGroup: {
-            background: isDrak ? "#616161" : "#f6f6f6",
-            color: isDrak ? "#ffffff" : "#060606",
-          },
-        }}
+        style={textFieldStyles}
       />
       <div
         className={styles.questionInputSendButtonContainer}
