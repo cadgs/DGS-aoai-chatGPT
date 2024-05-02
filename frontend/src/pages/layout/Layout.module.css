@@ -16,6 +16,17 @@
     background-color: var(--background-color); /* #046B99;*/
 }
 
+.footer {
+    position: absolute;
+    bottom: 0px;
+    right: 30px;
+    padding: 5px; /* Optional: Add padding for spacing */
+    /*
+    background-color: #ff88ff; /* Optional: Background color */
+    /*vertical-align: bottom;
+    /* Additional styles as needed */
+}
+
 .link {
     color: var(---link-color);
     font-weight: bold;

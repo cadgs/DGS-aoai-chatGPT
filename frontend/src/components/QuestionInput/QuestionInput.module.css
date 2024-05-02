@@ -18,6 +18,7 @@
     margin-left: 12px;
     margin-right: 12px;
     background-color: var(--ask-background-color);
+    color: var(--primary-text-color);
 }
 
 .questionInputSendButtonContainer {

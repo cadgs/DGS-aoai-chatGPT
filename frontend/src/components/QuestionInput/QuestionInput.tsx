@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { Stack, TextField, isDark } from "@fluentui/react";
 import { SendRegular } from "@fluentui/react-icons";
 import { AppStateContext } from "../../state/AppProvider";
-
+import useLocalStorage from "use-local-storage";
 import Send from "../../assets/Send.svg";
 import styles from "./QuestionInput.module.css";
 
@@ -23,8 +23,11 @@ export const QuestionInput = ({
 }: Props) => {
   const [question, setQuestion] = useState<string>("");
 
-  const appStateContext = useContext(AppStateContext);
-  const isDark: boolean | undefined = appStateContext?.state.isDarkMode;
+  //const appStateContext = useContext(AppStateContext);
+  //const isDark: boolean | undefined = appStateContext?.state.isDarkMode;
+
+  const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [isDark, setIsDark] = useLocalStorage("isDark", preference);
 
   const sendQuestion = () => {
     if (disabled || !question.trim()) {
@@ -78,7 +81,10 @@ export const QuestionInput = ({
         value={question}
         onChange={onQuestionChange}
         onKeyDown={onEnterPress}
-        style={textFieldStyles}
+        style={{
+          background: isDark ? "#616161" : "#f6f6f6",
+          color: isDark ? "#ffffff" : "#060606",
+        }}
       />
       <div
         className={styles.questionInputSendButtonContainer}

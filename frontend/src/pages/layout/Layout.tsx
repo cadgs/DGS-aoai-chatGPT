@@ -142,6 +142,12 @@ const Layout = () => {
         </Stack>
       </header>
       <Outlet />
+      <div className={styles.footer}>
+        <ThemeToggler
+          isChecked={isDark}
+          handleChange={() => setIsDark(!isDark)}
+        />
+      </div>
       <Dialog
         modalProps={{
           isBlocking: true,
@@ -187,11 +193,8 @@ const Layout = () => {
                 <ol>
                   <li>
                     <b>DO NOT</b> install or use any generative artificial
-                    intelligence (or GenAI) tool other than
-                    <a href="https://chat.dgs.ca.gov/" className={styles.link}>
-                      chat.dgs.ca.gov
-                    </a>
-                    on any devices issued by DGS or for any DGS business use.
+                    intelligence (or GenAI) tool other than this one on any
+                    devices issued by DGS or for any DGS business use.
                   </li>
                   <li>
                     <b>DO NOT</b> use any personally identifiable information
