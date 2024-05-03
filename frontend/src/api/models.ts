@@ -110,6 +110,7 @@ export type UI = {
     chat_logo?: string;
     show_share_button?: boolean;
     show_feedback_button?: boolean;
+    feedback_url?: string;
 }
 
 export type FrontendSettings = {

@@ -17,6 +17,7 @@ import { ThemeToggler } from "../../components/ThemeToggler/ThemeToggler";
 const Layout = () => {
   const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [isDark, setIsDark] = useLocalStorage("isDark", preference);
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
   const [isSharePanelOpen, setIsSharePanelOpen] = useState<boolean>(false);
   const [isGuidelinesOpen, setIsGuidelinesOpen] = useState<boolean>(true);
@@ -48,9 +49,13 @@ const Layout = () => {
 
   const handleFeedbackClick = () => {
     // Feedback form URL
-    const feedbackURL =
-      "https://forms.office.com/Pages/ResponsePage.aspx?id=sfdF6tcHqEm49TcTbsk4Lf9zgloA4zJBq3X6bgkEGcFUNDJESkdJS1pRTEJQSk84UlFMVzBXMVZWSS4u";
-    window.open(feedbackURL, "_blank");
+    // const feedbackURL = ui?.feedback_url;
+    // window.open(feedbackURL, "_blank");
+    // alert(feedbackURL);
+    window.open(
+      "https://forms.office.com/Pages/ResponsePage.aspx?id=sfdF6tcHqEm49TcTbsk4Lf9zgloA4zJBq3X6bgkEGcFUNDJESkdJS1pRTEJQSk84UlFMVzBXMVZWSS4u",
+      "_blank"
+    );
   };
 
   /*
@@ -159,13 +164,13 @@ const Layout = () => {
             {
               selectors: {
                 ["@media (min-width: 600px)"]: {
-                  maxWidth: "600px",
-                  minWidth: "550px",
+                  maxWidth: isMobile ? "120px" : "600px",
+                  minWidth: isMobile ? "100px" : "550px",
                   background: isDark ? "#2D2D2D" : "#FFFFFF",
                   color: isDark ? "#FFFFFF" : "#2D2D2D",
                   borderRadius: "8px",
-                  maxHeight: "600px",
-                  minHeight: "550px",
+                  maxHeight: isMobile ? "220px" : "600px",
+                  minHeight: isMobile ? "200px" : "550px",
                 },
               },
             },
@@ -183,7 +188,13 @@ const Layout = () => {
               <div className={styles.centerText}>
                 <p>By using DGS AI Chat, you agree to the following</p>
               </div>
-              <div className={styles.guidelineContainer}>
+              <div
+                className={
+                  isMobile
+                    ? styles.guidelineMobileContainer
+                    : styles.guidelineContainer
+                }
+              >
                 <p>
                   The security and privacy of our consumer, employee and partner
                   information is a top priority. Please follow these important
