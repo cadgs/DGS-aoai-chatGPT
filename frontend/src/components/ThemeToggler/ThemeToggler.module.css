@@ -34,7 +34,7 @@
 .toggle + label::after {
     content: "";
     height: 0.8em;
-    width: 0.8em;
+    width: 1.2em;
     border-radius: 1em;
     background-color: var(--toggle-fg);
     position: absolute;
