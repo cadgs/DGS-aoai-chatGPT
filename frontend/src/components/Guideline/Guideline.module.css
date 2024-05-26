@@ -1,0 +1,68 @@
+.guidelinesBox {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    height: 350px;
+    width: 500px;
+    color: var(--primary-text-color);
+    border: 1px solid #FFFFFF;
+    border-radius: 4px;
+}
+
+.centerText {
+    color: var(--primary-text-color);
+    text-align: center;
+}
+
+.titleCenterText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #046B99;
+    color: #D0D0D0;
+    height: 40px;
+}
+.guidelineContainer {
+    color: var(--primary-text-color);
+    height: 375px;
+    width: 500px;
+    padding: 2px 10px;
+    background-color: var(--guideline-background-color);
+    border: 1px solid #808080;
+    border-radius: 4px;
+    border-style:solid;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.guidelineMobileContainer {
+    color: var(--primary-text-color);
+    height: 200px;
+    width: 220px;
+    padding: 2px 10px;
+    background-color: var(--guideline-background-color);
+    border: 1px solid #808080;
+    border-radius: 4px;
+    border-style:solid;
+    overflow-y: scroll;
+}
+
+.guidelineButtonContainer {
+    margin-top: 15px;
+    box-sizing: border-box;
+    display: flex;
+    color: #D0D0D0;
+    flex-direction: row;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+    line-height: 15px;
+    width: 180px;
+    padding: 10px 12px;
+    gap: 4px;
+    background: #0066AA; /*#4F52BD;*/
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    cursor: pointer;
+}
