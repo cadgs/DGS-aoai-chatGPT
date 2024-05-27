@@ -1,47 +1,62 @@
-.toggle-container {
+.checkboxContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: var(--background-color);
+}
+
+.customCheckbox {
     display: flex;
     align-items: center;
     position: relative;
-    top: 2em;
-    right: 2em;
-    margin-right: 40px;
-    margin-bottom: 20px;
-}
-
-.toggle {
-    visibility: hidden;
-}
-
-.toggle + label {
-    display: flex;
-    /*align-items: right;*/
-    justify-content: flex-end; /* Align items to the right */
-    font-size: 0.8em;
     cursor: pointer;
-    color: var(--primary-text-color);
 }
 
-.toggle + label::before {
-    content: "";
-    height: 1em;
-    width: 2em;
-    border-radius: 1em;
-    background-color: var(--toggle-bg);
-    margin-right: 0.5em;
-    transition: background-color 250ms ease-in-out;
+.customCheckbox input {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-.toggle + label::after {
+.checkmark {
+    position: relative;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: #ccc;
+    border-radius: 40%; /* Makes the checkbox round */
+    transition: background-color 0.3s;
+    margin-right: 10px; /* Space between checkbox and label */
+}
+
+.customCheckbox input:checked + .checkmark {
+    background-color: #2196F3;
+}
+
+.checkmark:after {
     content: "";
-    height: 0.8em;
-    width: 1.2em;
-    border-radius: 1em;
-    background-color: var(--toggle-fg);
     position: absolute;
-    left: 0.2em;
-    transition: background-color 250ms ease-in-out, transform 250ms ease-in-out;
+    display: none;
+    left: 3px;
+    top: 1px;
+    width: 7px;   /* Adjust the size of the checkmark */
+    height: 12px;  /* Adjust the size of the checkmark */
+    border: solid white;
+    border-width: 0 3px 3px 0; /* Make the checkmark bold */
+    transform: rotate(45deg);
+    border-radius: 6px; /* Makes the checkmark rounded */
 }
 
-.toggle:checked + label::after {
-    transform: translateX(100%);
+.customCheckbox input:checked + .checkmark:after {
+    display: block;
+}
+
+.labelText {
+    font-style: bold;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--primary-text-color);
 }

@@ -14,10 +14,18 @@ import { AppStateContext } from "../../state/AppProvider";
 import { CosmosDBStatus } from "../../api";
 import { ThemeToggler } from "../../components/ThemeToggler/ThemeToggler";
 import { Guideline } from "../../components/Guideline/Guideline";
+import { LongShortAnswerSwitch } from "../../components/LongShortAnswerSwitch/LongShortAnswerSwitch";
+import { DefaultPalette, getTheme } from "@fluentui/react/lib/Styling";
 
 const Layout = () => {
+  const theme = getTheme();
   const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [isDark, setIsDark] = useLocalStorage("isDark", preference);
+  const [isLongAnswer, setIsLongAnswer] = useLocalStorage(
+    "isLongAnswer",
+    preference
+  );
+
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
   const [isSharePanelOpen, setIsSharePanelOpen] = useState<boolean>(false);
@@ -117,6 +125,10 @@ const Layout = () => {
             tokens={{ childrenGap: 4 }}
             className={styles.shareButtonContainer}
           >
+            <LongShortAnswerSwitch
+              isChecked={isLongAnswer}
+              handleChange={() => setIsLongAnswer(!isLongAnswer)}
+            />
             {appStateContext?.state.isCosmosDBAvailable?.status !==
               CosmosDBStatus.NotConfigured && (
               <HistoryButton
@@ -139,10 +151,19 @@ const Layout = () => {
       </header>
       <Outlet />
       <div className={styles.footer}>
-        <ThemeToggler
-          isChecked={isDark}
-          handleChange={() => setIsDark(!isDark)}
-        />
+        <Stack
+          horizontal
+          verticalAlign="center"
+          horizontalAlign="space-between"
+          tokens={{ padding: theme.spacing.m }} // Using padding token from Fluent UI theme
+        >
+          <Stack horizontal verticalAlign="center">
+            <ThemeToggler
+              isChecked={isDark}
+              handleChange={() => setIsDark(!isDark)}
+            />
+          </Stack>
+        </Stack>
       </div>
       <Guideline />
     </div>

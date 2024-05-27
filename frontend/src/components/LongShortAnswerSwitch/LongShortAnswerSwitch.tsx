@@ -9,15 +9,17 @@ export const LongShortAnswerSwitch = ({
   handleChange: () => void;
 }) => {
   return (
-    <div className={styles.togglContainer}>
-      <input
-        type="checkbox"
-        id="check"
-        className={styles.toggle}
-        onChange={handleChange}
-        checked={isChecked}
-      />
-      <label htmlFor="check">Long Answer</label>
+    <div className={styles.checkboxContainer}>
+      <label className={styles.customCheckbox}>
+        <input
+          type="checkbox"
+          id="longAnswer"
+          onChange={handleChange}
+          checked={isChecked}
+        />
+        <span className={styles.checkmark}></span>
+        <span className={styles.labelText}>Long Answer</span>
+      </label>
     </div>
   );
 };

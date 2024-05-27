@@ -9,7 +9,7 @@ export const ThemeToggler = ({
   handleChange: () => void;
 }) => {
   return (
-    <div className={styles.togglContainer}>
+    <div className={styles.toggleContainer}>
       <input
         type="checkbox"
         id="check"
@@ -17,7 +17,7 @@ export const ThemeToggler = ({
         onChange={handleChange}
         checked={isChecked}
       />
-      <label htmlFor="check">Dark Mode</label>
+      <label htmlFor="check">&nbsp;Dark Mode</label>
     </div>
   );
 };
