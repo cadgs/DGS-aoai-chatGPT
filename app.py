@@ -50,6 +50,7 @@ UI_FAVICON = os.environ.get("UI_FAVICON") or "/dgs_logo.png"
 UI_SHOW_SHARE_BUTTON = os.environ.get("UI_SHOW_SHARE_BUTTON", "true").lower() == "true"
 UI_SHOW_FEEDBACK_BUTTON = os.environ.get("UI_SHOW_FEEDBACK_BUTTON", "true").lower() == "true"
 UI_FEEDBACK_URL = (os.environ.get("UI_SHOW_FEEDBACK_BUTTON") or 'https://chat.dgs.ca.gov')
+UI_LONG_ANSWER = os.environ.get("UI_LONG_ANSWER", "true").lower() == "true"
 
 
 def create_app():
@@ -273,6 +274,7 @@ frontend_settings = {
         "show_share_button": UI_SHOW_SHARE_BUTTON,
         "show_feedback_button": UI_SHOW_FEEDBACK_BUTTON,
         "feedback_url": UI_FEEDBACK_URL,
+        "long_answer": UI_LONG_ANSWER,
     },
     "sanitize_answer": SANITIZE_ANSWER,
 }

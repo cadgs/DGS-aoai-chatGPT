@@ -40,7 +40,7 @@
     background-color: var(--toggle-fg);
     position: absolute;
     margin-top: 0.3em;  /* align the toggle vertical with the label text */
-    left: 1.6em;
+    left: 1.6em;  /* align the switch button with the container box */
     transition: background-color 250ms ease-in-out, transform 250ms ease-in-out;
 }
 

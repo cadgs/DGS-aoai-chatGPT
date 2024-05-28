@@ -111,6 +111,7 @@ export type UI = {
     show_share_button?: boolean;
     show_feedback_button?: boolean;
     feedback_url?: string;
+    long_answer?: boolean;
 }
 
 export type FrontendSettings = {
