@@ -19,6 +19,7 @@ export const LongShortAnswerSwitch = ({
         />
         <span className={styles.checkmark}></span>
         <span className={styles.labelText}>Long Answer</span>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </label>
     </div>
   );
