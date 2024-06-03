@@ -52,6 +52,10 @@ UI_SHOW_FEEDBACK_BUTTON = os.environ.get("UI_SHOW_FEEDBACK_BUTTON", "true").lowe
 UI_FEEDBACK_URL = (os.environ.get("UI_SHOW_FEEDBACK_BUTTON") or 'https://chat.dgs.ca.gov')
 UI_LONG_ANSWER = os.environ.get("UI_LONG_ANSWER", "true").lower() == "true"
 
+# Update max token based on the Long/Short answer setting
+# TODO: we may need to add a new ENV variable for the token numbers of short answer.
+AZURE_OPENAI_MAX_TOKENS = 1000 if UI_LONG_ANSWER else 400
+
 
 def create_app():
     app = Quart(__name__)
