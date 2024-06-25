@@ -72,6 +72,15 @@ Please see the [section below](#add-an-identity-provider) for important informat
     - `AZURE_SEARCH_STRICTNESS`
     - `AZURE_OPENAI_EMBEDDING_NAME`
 
+    Customized variables:
+    For the long answer token, the default value is 1000. For the short answer token, the default value is 400.
+    - `UI_SHOW_FEEDBACK_BUTTON`
+    - `UI_FEEDBACK_URL`
+    - `UI_LONG_ANSWER_TOKEN`
+    - `UI_SHORT_ANSWER_TOKEN`
+    - `UI_LONG_ANSWER`
+
+
 3. Start the app with `start.cmd`. This will build the frontend, install backend dependencies, and then start the app. Or, just run the backend in debug mode using the VSCode debug configuration in `.vscode/launch.json`.
 4. You can see the local running app at http://127.0.0.1:50505.
 
@@ -237,6 +246,11 @@ Note: settings starting with `AZURE_SEARCH` are only needed when using Azure Ope
 |PROMPTFLOW_REQUEST_FIELD_NAME|query|Default field name to construct Promptflow request. Note: chat_history is auto constucted based on the interaction, if your API expects other mandatory field you will need to change the request parameters under `promptflow_request` function.|
 |PROMPTFLOW_RESPONSE_FIELD_NAME|reply|Default field name to process the response from Promptflow request.|
 |PROMPTFLOW_CITATIONS_FIELD_NAME|documents|Default field name to process the citations output from Promptflow request.|
+|UI_SHOW_FEEDBACK_BUTTON||Whether or not to show the feedback button.|
+|UI_FEEDBACK_URL||Feedback page URL.|
+|UI_LONG_ANSWER_TOKEN|1000|Token number for long answer.|
+|UI_SHORT_ANSWER_TOKEN|400|Token number for short answer.|
+|UI_LONG_ANSWER|False|Whether to use long answer or not.|
 
 ## Contributing
 

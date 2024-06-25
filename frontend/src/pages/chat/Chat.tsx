@@ -61,6 +61,12 @@ const Chat = () => {
   const appStateContext = useContext(AppStateContext);
   const ui = appStateContext?.state.frontendSettings?.ui;
   const AUTH_ENABLED = appStateContext?.state.frontendSettings?.auth_enabled;
+  const COSMOSDB_ENABLED = appStateContext?.state.isCosmosDBAvailable?.cosmosDB;
+
+  const auth_message = `Chat: AUTH_ENABLED is - ${AUTH_ENABLED}!`;
+  const cosmosdb_message = `Chat: COSMOSDB_ENABLED is - ${COSMOSDB_ENABLED}`;
+  //alert(auth_message + " \n" + cosmosdb_message);
+
   const chatMessageStreamEnd = useRef<HTMLDivElement | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showLoadingMessage, setShowLoadingMessage] = useState<boolean>(false);
@@ -133,8 +139,15 @@ const Chat = () => {
       return;
     }
     const userInfoList = await getUserInfo();
-    if (userInfoList.length === 0 && window.location.hostname !== "127.0.0.1") {
+    //alert(`userInfoList lenght is: ${userInfoList.length}`);
+
+    if (
+      userInfoList.length === 0 &&
+      window.location.hostname !== "127.0.0.1" &&
+      window.location.hostname !== "localhost"
+    ) {
       setShowAuthMessage(true);
+      //alert("setShowAuthMessage(true)");
     } else {
       setShowAuthMessage(false);
     }

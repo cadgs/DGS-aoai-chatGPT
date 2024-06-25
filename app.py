@@ -49,12 +49,13 @@ UI_CHAT_DESCRIPTION = (
 UI_FAVICON = os.environ.get("UI_FAVICON") or "/dgs_logo.png"
 UI_SHOW_SHARE_BUTTON = os.environ.get("UI_SHOW_SHARE_BUTTON", "true").lower() == "true"
 UI_SHOW_FEEDBACK_BUTTON = os.environ.get("UI_SHOW_FEEDBACK_BUTTON", "true").lower() == "true"
-UI_FEEDBACK_URL = (os.environ.get("UI_SHOW_FEEDBACK_BUTTON") or 'https://chat.dgs.ca.gov')
+UI_FEEDBACK_URL = (os.environ.get("UI_SHOW_FEEDBACK_BUTTON") or 'https://chat.dgs.ca.gov')  # find out how to get the host name on the fly
 UI_LONG_ANSWER = os.environ.get("UI_LONG_ANSWER", "true").lower() == "true"
+UI_LONG_ANSWER_TOKEN = (os.environ.get("UI_LONG_ANSWER_TOKEN") or 1000) 
+UI_SHORT_ANSWER_TOKEN = (os.environ.get("UI_SHORT_ANSWER_TOKEN") or 400)
 
 # Update max token based on the Long/Short answer setting
-# TODO: we may need to add a new ENV variable for the token numbers of short answer.
-AZURE_OPENAI_MAX_TOKENS = 1000 if UI_LONG_ANSWER else 400
+AZURE_OPENAI_MAX_TOKENS = UI_LONG_ANSWER_TOKEN if UI_LONG_ANSWER else UI_SHORT_ANSWER_TOKEN
 
 
 def create_app():

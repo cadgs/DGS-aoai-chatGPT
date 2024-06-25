@@ -2,7 +2,15 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python: Sample App Backend",
+      "name": "DGS AI Chat App Frontend",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:50505",
+      "webRoot": "${workspaceFolder}/frontend",
+      "sourceMaps": true
+  },
+    {
+      "name": "Python: DGS AI Chat App Backend",
       "type": "python",
       "request": "launch",
       "module": "quart",
