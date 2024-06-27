@@ -26,8 +26,11 @@ import { isEmpty } from "lodash";
 import DOMPurify from "dompurify";
 
 import styles from "./Chat.module.css";
+import styles2 from "../../components/Auth/ChatAuth.module.css";
+
 import Contoso from "../../assets/Contoso.svg";
 import { XSSAllowTags } from "../../constants/xssAllowTags";
+import ChatAuth from "../../components/Auth/ChatAuth";
 
 import {
   ChatMessage,
@@ -783,59 +786,23 @@ const Chat = () => {
   return (
     <div className={styles.container} role="main">
       {showAuthMessage ? (
-        <Stack className={styles.chatEmptyState}>
-          <ShieldLockRegular
-            className={styles.chatIcon}
-            style={{ color: "darkorange", height: "200px", width: "200px" }}
-          />
-          <h1 className={styles.chatEmptyStateTitle}>
-            Authentication Not Configured
-          </h1>
-          <h2 className={styles.chatEmptyStateSubtitle}>
-            This app does not have authentication configured. Please add an
-            identity provider by finding your app in the{" "}
-            <a href="https://portal.azure.com/" target="_blank">
-              Azure Portal
-            </a>
-            and following{" "}
-            <a
-              href="https://learn.microsoft.com/en-us/azure/app-service/scenario-secure-app-authentication-app-service#3-configure-authentication-and-authorization"
-              target="_blank"
-            >
-              these instructions
-            </a>
-            .
-          </h2>
-          <h2
-            className={styles.chatEmptyStateSubtitle}
-            style={{ fontSize: "20px" }}
-          >
-            <strong>
-              Authentication configuration takes a few minutes to apply.{" "}
-            </strong>
-          </h2>
-          <h2
-            className={styles.chatEmptyStateSubtitle}
-            style={{ fontSize: "20px" }}
-          >
-            <strong>
-              If you deployed in the last 10 minutes, please wait and reload the
-              page after 10 minutes.
-            </strong>
-          </h2>
-        </Stack>
+        /* Following HTML is for showing auth message UI */
+        <ChatAuth />
       ) : (
+        /* Following HTML is for not showing auth message UI */
         <Stack horizontal className={styles.chatRoot}>
           <div className={styles.chatContainer}>
             {!messages || messages.length < 1 ? (
-              <Stack className={styles.chatEmptyState}>
+              <Stack className={styles2.chatEmptyState}>
                 <img
                   src={ui?.chat_logo ? ui.chat_logo : Contoso}
                   className={styles.chatIcon}
                   aria-hidden="true"
                 />
-                <h1 className={styles.chatEmptyStateTitle}>{ui?.chat_title}</h1>
-                <h2 className={styles.chatEmptyStateSubtitle}>
+                <h1 className={styles2.chatEmptyStateTitle}>
+                  {ui?.chat_title}
+                </h1>
+                <h2 className={styles2.chatEmptyStateSubtitle}>
                   {ui?.chat_description}
                 </h2>
               </Stack>
@@ -1073,7 +1040,7 @@ const Chat = () => {
           {appStateContext?.state.isChatHistoryOpen &&
             appStateContext?.state.isCosmosDBAvailable?.status !==
               CosmosDBStatus.NotConfigured && <ChatHistoryPanel />}
-        </Stack>
+        </Stack> /* End of none-auth message UI */
       )}
     </div>
   );
