@@ -136,3 +136,10 @@ export enum Feedback {
     Manipulative = "manipulative",
     OtherHarmful = "other_harmlful"
 }
+
+// Add extra models for DGS AI Chatbot
+export enum messageStatus {
+    NotRunning = "Not Running",
+    Processing = "Processing",
+    Done = "Done",
+  }

@@ -198,6 +198,7 @@ const Chat = () => {
     }
   };
 
+  /* ------------ Begin of Make API Requests Without CosmoDB ------------ */
   const makeApiRequestWithoutCosmosDB = async (
     question: string,
     conversationId?: string
@@ -343,8 +344,9 @@ const Chat = () => {
     }
 
     return abortController.abort();
-  };
+  }; /* ------------ End of Make API Requests Without CosmoDB ------------ */
 
+  /* -------------- Begin of Make API Request With CosmoDB --------------*/
   const makeApiRequestWithCosmosDB = async (
     question: string,
     conversationId?: string
@@ -617,6 +619,7 @@ const Chat = () => {
     }
     return abortController.abort();
   };
+  /* -------------- End of Make API Request With CosmoDB --------------*/
 
   const clearChat = async () => {
     setClearingChat(true);
@@ -870,6 +873,7 @@ const Chat = () => {
               </div>
             )}
 
+            {/* ------------- Begin of Stop Generating Button --------------*/}
             <Stack horizontal className={styles.chatInput}>
               {isLoading && (
                 <Stack
@@ -898,6 +902,7 @@ const Chat = () => {
               <Stack>
                 {appStateContext?.state.isCosmosDBAvailable?.status !==
                   CosmosDBStatus.NotConfigured && (
+                  /* --------------- Start of START NEW CHAT button -------------- */
                   <CommandBarButton
                     role="button"
                     styles={{
@@ -922,7 +927,9 @@ const Chat = () => {
                     disabled={disabledButton()}
                     aria-label="start a new chat button"
                   />
+                  /* --------------- End of START NEW CHAT button -------------- */
                 )}
+                {/* --------------- Start of BLOOM button -------------- */}
                 <CommandBarButton
                   role="button"
                   styles={{
@@ -957,6 +964,7 @@ const Chat = () => {
                   disabled={disabledButton()}
                   aria-label="clear chat button"
                 />
+                {/* --------------- End of BLOOM button -------------- */}
                 <Dialog
                   hidden={hideErrorDialog}
                   onDismiss={handleErrorDialogClose}
@@ -980,6 +988,7 @@ const Chat = () => {
                 }
               />
             </Stack>
+            {/* ------------- End of Stop Generating Button --------------*/}
           </div>
           {/* Citation Panel */}
           {messages &&

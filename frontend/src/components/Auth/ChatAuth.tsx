@@ -1,4 +1,3 @@
-import React from "react";
 import { Stack } from "@fluentui/react";
 import { ShieldLockRegular } from "@fluentui/react-icons";
 import styles from "./ChatAuth.module.css";
