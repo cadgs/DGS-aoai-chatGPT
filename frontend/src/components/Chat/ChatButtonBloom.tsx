@@ -34,13 +34,15 @@ import {
 import styles from "./ChatButtonBloom.module.css";
 
 import { AppStateContext } from "../../state/AppProvider";
+import { ChatStateContext } from "../../state/ChatProvider";
 import { useBoolean } from "@fluentui/react-hooks";
 import { messageStatus } from "../../api/models";
 
 const ChatButtonBloom = () => {
   const appStateContext = useContext(AppStateContext);
+  const chatStateContext = useContext(ChatStateContext);
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  //const [isLoading, setIsLoading] = useState<boolean>(false);
   const [clearingChat, setClearingChat] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<ErrorMessage | null>();
   const [hideErrorDialog, { toggle: toggleErrorDialog }] = useBoolean(true);
@@ -94,7 +96,7 @@ const ChatButtonBloom = () => {
 
   const disabledButton = () => {
     return (
-      isLoading ||
+      chatStateContext?.state.isLoading ||
       (messages && messages.length === 0) ||
       clearingChat ||
       appStateContext?.state.chatHistoryLoadingState ===

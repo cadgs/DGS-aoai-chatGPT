@@ -1,0 +1,28 @@
+import { ChatAction, ChatState } from "./ChatProvider";
+
+// Define the reducer function
+export const chatStateReducer = (
+  state: ChatState,
+  action: ChatAction
+): ChatState => {
+  switch (action.type) {
+    case "TOGGLE_LOADING":
+      return { ...state, isLoading: !state.isLoading };
+    case "TOGGLE_CLEARING":
+      return { ...state, clearingChat: !state.clearingChat };
+    case "SET_ERR_MESSAGE":
+      return { ...state, errorMsg: action.payload };
+    case "TOGGLE_HIDE_ERR_DIALOG":
+      return { ...state, hideErrorDialog: !state.hideErrorDialog };
+    case "SET_ACTIVE_CITATION":
+      return { ...state, activeCitation: action.payload };
+    case "TOGGLE_CITATION_PANEL_OPEN":
+      return { ...state, isCitationPanelOpen: !state.isCitationPanelOpen };
+    case "UPDATE_MESSAGES":
+      return { ...state, messages: action.payload };
+    case "PROCESS_MESSAGES":
+      return { ...state, processMessages: action.payload };
+    default:
+      return state;
+  }
+};

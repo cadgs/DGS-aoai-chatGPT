@@ -9,26 +9,29 @@ import Layout from "./pages/layout/Layout";
 import NoPage from "./pages/NoPage";
 import Chat from "./pages/chat/Chat";
 import { AppStateProvider } from "./state/AppProvider";
+import { ChatStateProvider } from "./state/ChatProvider";
 
 initializeIcons();
 
 export default function App() {
-    return (
-        <AppStateProvider>
-            <HashRouter>
-                <Routes>
-                    <Route path="/" element={<Layout />}>
-                        <Route index element={<Chat />} />
-                        <Route path="*" element={<NoPage />} />
-                    </Route>
-                </Routes>
-            </HashRouter>
-        </AppStateProvider>
-    );
+  return (
+    <AppStateProvider>
+      <ChatStateProvider>
+        <HashRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Chat />} />
+              <Route path="*" element={<NoPage />} />
+            </Route>
+          </Routes>
+        </HashRouter>
+      </ChatStateProvider>
+    </AppStateProvider>
+  );
 }
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
