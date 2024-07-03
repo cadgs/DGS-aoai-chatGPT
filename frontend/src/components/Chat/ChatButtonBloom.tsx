@@ -35,7 +35,7 @@ import styles from "./ChatButtonBloom.module.css";
 
 import { AppStateContext } from "../../state/AppProvider";
 import { ChatStateContext } from "../../state/ChatProvider";
-import { useBoolean } from "@fluentui/react-hooks";
+//import { useBoolean } from "@fluentui/react-hooks";
 import { messageStatus } from "../../api/models";
 
 const ChatButtonBloom = () => {
@@ -43,31 +43,42 @@ const ChatButtonBloom = () => {
   const chatStateContext = useContext(ChatStateContext);
 
   //const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [clearingChat, setClearingChat] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<ErrorMessage | null>();
-  const [hideErrorDialog, { toggle: toggleErrorDialog }] = useBoolean(true);
-  const [activeCitation, setActiveCitation] = useState<Citation>();
-  const [isCitationPanelOpen, setIsCitationPanelOpen] =
-    useState<boolean>(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [processMessages, setProcessMessages] = useState<messageStatus>(
-    messageStatus.NotRunning
-  );
+  //const [clearingChat, setClearingChat] = useState<boolean>(false);
+  //const [errorMsg, setErrorMsg] = useState<ErrorMessage | null>();
+  //const [hideErrorDialog, { toggle: toggleErrorDialog }] = useBoolean(true);
+  //const [activeCitation, setActiveCitation] = useState<Citation>();
+  //const [isCitationPanelOpen, setIsCitationPanelOpen] =  useState<boolean>(false);
+  //const [messages, setMessages] = useState<ChatMessage[]>([]);
+  //const [processMessages, setProcessMessages] = useState<messageStatus>( messageStatus.NotRunning);
 
   const clearChat = async () => {
-    setClearingChat(true);
+    //setClearingChat(true);
+    chatStateContext?.dispatch({
+      type: "SET_CLEARING_CHAT",
+      payload: true,
+    });
+
     if (
       appStateContext?.state.currentChat?.id &&
       appStateContext?.state.isCosmosDBAvailable.cosmosDB
     ) {
       let response = await historyClear(appStateContext?.state.currentChat.id);
       if (!response.ok) {
-        setErrorMsg({
+        /* setErrorMsg({
           title: "Error clearing current chat",
           subtitle:
             "Please try again. If the problem persists, please contact the site administrator.",
+        }); */
+        chatStateContext?.dispatch({
+          type: "SET_ERR_MESSAGE",
+          payload: {
+            title: "Error clearing current chat",
+            subtitle:
+              "Please try again. If the problem persists, please contact the site administrator.",
+          },
         });
-        toggleErrorDialog();
+        //toggleErrorDialog();
+        chatStateContext?.dispatch({ type: "TOGGLE_HIDE_ERR_DIALOG" });
       } else {
         appStateContext?.dispatch({
           type: "DELETE_CURRENT_CHAT_MESSAGES",
@@ -77,28 +88,71 @@ const ChatButtonBloom = () => {
           type: "UPDATE_CHAT_HISTORY",
           payload: appStateContext?.state.currentChat,
         });
-        setActiveCitation(undefined);
-        setIsCitationPanelOpen(false);
-        setMessages([]);
+        //setActiveCitation(undefined);
+        chatStateContext?.dispatch({
+          type: "SET_ACTIVE_CITATION",
+          payload: null,
+        });
+
+        //setIsCitationPanelOpen(false);
+        chatStateContext?.dispatch({
+          type: "SET_CITATION_PANEL_OPEN",
+          payload: false,
+        });
+
+        //setMessages([]);
+        chatStateContext?.dispatch({
+          type: "SET_MESSAGES",
+          payload: [],
+        });
       }
     }
-    setClearingChat(false);
+    // setClearingChat(false);
+    chatStateContext?.dispatch({
+      type: "SET_CLEARING_CHAT",
+      payload: false,
+    });
   };
 
   const newChat = () => {
-    setProcessMessages(messageStatus.Processing);
-    setMessages([]);
-    setIsCitationPanelOpen(false);
-    setActiveCitation(undefined);
+    //setProcessMessages(messageStatus.Processing);
+    chatStateContext?.dispatch({
+      type: "PROCESS_MESSAGES",
+      payload: messageStatus.Processing,
+    });
+
+    //setMessages([]);
+    chatStateContext?.dispatch({
+      type: "SET_MESSAGES",
+      payload: [],
+    });
+
+    //setIsCitationPanelOpen(false);
+    chatStateContext?.dispatch({
+      type: "SET_CITATION_PANEL_OPEN",
+      payload: false,
+    });
+
+    //setActiveCitation(undefined);
+    chatStateContext?.dispatch({
+      type: "SET_ACTIVE_CITATION",
+      payload: null,
+    });
+
     appStateContext?.dispatch({ type: "UPDATE_CURRENT_CHAT", payload: null });
-    setProcessMessages(messageStatus.Done);
+    //setProcessMessages(messageStatus.Done);
+    chatStateContext?.dispatch({
+      type: "PROCESS_MESSAGES",
+      payload: messageStatus.Done,
+    });
   };
 
   const disabledButton = () => {
     return (
       chatStateContext?.state.isLoading ||
-      (messages && messages.length === 0) ||
-      clearingChat ||
+      (chatStateContext?.state.messages &&
+        chatStateContext?.state.messages.length === 0) ||
+      chatStateContext?.state.clearingChat ||
       appStateContext?.state.chatHistoryLoadingState ===
         ChatHistoryLoadingState.Loading
     );

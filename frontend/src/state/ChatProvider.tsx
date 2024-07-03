@@ -10,7 +10,7 @@ export interface ChatState {
   hideErrorDialog: boolean;
   activeCitation: Citation | null;
   isCitationPanelOpen: boolean;
-  messages: ChatMessage | null;
+  messages: ChatMessage[] | null;
   processMessages: messageStatus | null;
 }
 
@@ -18,21 +18,21 @@ const initialChatState: ChatState = {
   isLoading: false,
   clearingChat: false,
   errorMsg: null,
-  hideErrorDialog: false,
+  hideErrorDialog: true,
   activeCitation: null,
   isCitationPanelOpen: false,
-  messages: null,
-  processMessages: null,
+  messages: [],
+  processMessages: messageStatus.NotRunning,
 };
 
 export type ChatAction =
   | { type: "TOGGLE_LOADING" }
-  | { type: "TOGGLE_CLEARING" }
+  | { type: "SET_CLEARING_CHAT"; payload: boolean }
   | { type: "SET_ERR_MESSAGE"; payload: ErrorMessage }
   | { type: "TOGGLE_HIDE_ERR_DIALOG" }
   | { type: "SET_ACTIVE_CITATION"; payload: Citation | null }
-  | { type: "TOGGLE_CITATION_PANEL_OPEN" }
-  | { type: "UPDATE_MESSAGES"; payload: ChatMessage } // API Call
+  | { type: "SET_CITATION_PANEL_OPEN"; payload: boolean }
+  | { type: "SET_MESSAGES"; payload: ChatMessage[] | null } // API Call
   | { type: "PROCESS_MESSAGES"; payload: messageStatus };
 
 export const ChatStateContext = createContext<

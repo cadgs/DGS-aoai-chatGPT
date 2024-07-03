@@ -53,6 +53,7 @@ import { QuestionInput } from "../../components/QuestionInput";
 import { ChatHistoryPanel } from "../../components/ChatHistory/ChatHistoryPanel";
 import { AppStateContext } from "../../state/AppProvider";
 import { useBoolean } from "@fluentui/react-hooks";
+import ChatButtonBloom from "../../components/Chat/ChatButtonBloom";
 
 const enum messageStatus {
   NotRunning = "Not Running",
@@ -930,6 +931,7 @@ const Chat = () => {
                   /* --------------- End of START NEW CHAT button -------------- */
                 )}
                 {/* --------------- Start of BLOOM button -------------- */}
+                {/*
                 <CommandBarButton
                   role="button"
                   styles={{
@@ -964,6 +966,9 @@ const Chat = () => {
                   disabled={disabledButton()}
                   aria-label="clear chat button"
                 />
+                 */}
+                <ChatButtonBloom />
+
                 {/* --------------- End of BLOOM button -------------- */}
                 <Dialog
                   hidden={hideErrorDialog}
