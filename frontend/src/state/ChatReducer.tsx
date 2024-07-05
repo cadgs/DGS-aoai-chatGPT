@@ -6,8 +6,8 @@ export const chatStateReducer = (
   action: ChatAction
 ): ChatState => {
   switch (action.type) {
-    case "TOGGLE_LOADING":
-      return { ...state, isLoading: !state.isLoading };
+    case "SET_LOADING":
+      return { ...state, isLoading: action.payload };
     case "SET_CLEARING_CHAT":
       return { ...state, clearingChat: action.payload };
     case "SET_ERR_MESSAGE":

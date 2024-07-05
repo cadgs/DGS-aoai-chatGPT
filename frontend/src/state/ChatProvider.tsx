@@ -26,7 +26,7 @@ const initialChatState: ChatState = {
 };
 
 export type ChatAction =
-  | { type: "TOGGLE_LOADING" }
+  | { type: "SET_LOADING"; payload: boolean }
   | { type: "SET_CLEARING_CHAT"; payload: boolean }
   | { type: "SET_ERR_MESSAGE"; payload: ErrorMessage }
   | { type: "TOGGLE_HIDE_ERR_DIALOG" }

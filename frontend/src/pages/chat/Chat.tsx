@@ -52,6 +52,7 @@ import { Answer } from "../../components/Answer";
 import { QuestionInput } from "../../components/QuestionInput";
 import { ChatHistoryPanel } from "../../components/ChatHistory/ChatHistoryPanel";
 import { AppStateContext } from "../../state/AppProvider";
+import { ChatStateContext } from "../../state/ChatProvider";
 import { useBoolean } from "@fluentui/react-hooks";
 import ChatButtonBloom from "../../components/Chat/ChatButtonBloom";
 
@@ -63,6 +64,8 @@ const enum messageStatus {
 
 const Chat = () => {
   const appStateContext = useContext(AppStateContext);
+  const chatStateContext = useContext(ChatStateContext);
+
   const ui = appStateContext?.state.frontendSettings?.ui;
   const AUTH_ENABLED = appStateContext?.state.frontendSettings?.auth_enabled;
   const COSMOSDB_ENABLED = appStateContext?.state.isCosmosDBAvailable?.cosmosDB;
@@ -72,7 +75,7 @@ const Chat = () => {
   //alert(auth_message + " \n" + cosmosdb_message);
 
   const chatMessageStreamEnd = useRef<HTMLDivElement | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  //const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showLoadingMessage, setShowLoadingMessage] = useState<boolean>(false);
   const [activeCitation, setActiveCitation] = useState<Citation>();
   const [isCitationPanelOpen, setIsCitationPanelOpen] =
@@ -123,6 +126,13 @@ const Chat = () => {
     }
   }, [appStateContext?.state.isCosmosDBAvailable]);
 
+  const setIsLoading = (isLoading: boolean) => {
+    chatStateContext?.dispatch({
+      type: "SET_LOADING",
+      payload: isLoading,
+    });
+  };
+
   const handleErrorDialogClose = () => {
     toggleErrorDialog();
     setTimeout(() => {
@@ -131,10 +141,17 @@ const Chat = () => {
   };
 
   useEffect(() => {
+    /*
     setIsLoading(
       appStateContext?.state.chatHistoryLoadingState ===
         ChatHistoryLoadingState.Loading
-    );
+    );*/
+    chatStateContext?.dispatch({
+      type: "SET_LOADING",
+      payload:
+        appStateContext?.state.chatHistoryLoadingState ===
+        ChatHistoryLoadingState.Loading,
+    });
   }, [appStateContext?.state.chatHistoryLoadingState]);
 
   const getUserInfoList = async () => {
@@ -779,7 +796,7 @@ const Chat = () => {
 
   const disabledButton = () => {
     return (
-      isLoading ||
+      chatStateContext?.state.isLoading ||
       (messages && messages.length === 0) ||
       clearingChat ||
       appStateContext?.state.chatHistoryLoadingState ===
@@ -813,7 +830,11 @@ const Chat = () => {
             ) : (
               <div
                 className={styles.chatMessageStream}
-                style={{ marginBottom: isLoading ? "40px" : "0px" }}
+                style={{
+                  marginBottom: chatStateContext?.state.isLoading
+                    ? "40px"
+                    : "0px",
+                }}
                 role="log"
               >
                 {messages.map((answer, index) => (
@@ -876,7 +897,7 @@ const Chat = () => {
 
             {/* ------------- Begin of Stop Generating Button --------------*/}
             <Stack horizontal className={styles.chatInput}>
-              {isLoading && (
+              {chatStateContext?.state.isLoading && (
                 <Stack
                   horizontal
                   className={styles.stopGeneratingContainer}
@@ -980,7 +1001,7 @@ const Chat = () => {
               <QuestionInput
                 clearOnSend
                 placeholder="Type a new question..."
-                disabled={isLoading}
+                disabled={chatStateContext?.state.isLoading ?? false}
                 onSend={(question, id) => {
                   appStateContext?.state.isCosmosDBAvailable?.cosmosDB
                     ? makeApiRequestWithCosmosDB(question, id)
