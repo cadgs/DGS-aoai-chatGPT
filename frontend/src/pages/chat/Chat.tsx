@@ -66,6 +66,8 @@ const Chat = () => {
   const appStateContext = useContext(AppStateContext);
   const chatStateContext = useContext(ChatStateContext);
 
+  const messages = chatStateContext?.state.messages ?? [];
+
   const ui = appStateContext?.state.frontendSettings?.ui;
   const AUTH_ENABLED = appStateContext?.state.frontendSettings?.auth_enabled;
   const COSMOSDB_ENABLED = appStateContext?.state.isCosmosDBAvailable?.cosmosDB;
@@ -82,7 +84,7 @@ const Chat = () => {
     useState<boolean>(false);
   const abortFuncs = useRef([] as AbortController[]);
   const [showAuthMessage, setShowAuthMessage] = useState<boolean | undefined>();
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  //const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [processMessages, setProcessMessages] = useState<messageStatus>(
     messageStatus.NotRunning
   );
@@ -130,6 +132,13 @@ const Chat = () => {
     chatStateContext?.dispatch({
       type: "SET_LOADING",
       payload: isLoading,
+    });
+  };
+
+  const setMessages = (messages: ChatMessage[]) => {
+    chatStateContext?.dispatch({
+      type: "SET_MESSAGES",
+      payload: messages,
     });
   };
 
@@ -953,42 +962,41 @@ const Chat = () => {
                 )}
                 {/* --------------- Start of BLOOM button -------------- */}
                 {/*
-                <CommandBarButton
-                  role="button"
-                  styles={{
-                    icon: {
-                      color: "#FFFFFF",
-                    },
-                    iconDisabled: {
-                      color: "#BDBDBD !important",
-                    },
-                    root: {
-                      color: "#FFFFFF",
-                      background:
-                        "radial-gradient(109.81% 107.82% at 100.1% 90.19%, #0F6CBD 33.63%, #2D87C3 70.31%, #8DDDD8 100%)",
-                    },
-                    rootDisabled: {
-                      background: "#F0F0F0",
-                    },
-                  }}
-                  className={
-                    appStateContext?.state.isCosmosDBAvailable?.status !==
-                    CosmosDBStatus.NotConfigured
-                      ? styles.clearChatBroom
-                      : styles.clearChatBroomNoCosmos
-                  }
-                  iconProps={{ iconName: "Broom" }}
-                  onClick={
-                    appStateContext?.state.isCosmosDBAvailable?.status !==
-                    CosmosDBStatus.NotConfigured
-                      ? clearChat
-                      : newChat
-                  }
-                  disabled={disabledButton()}
-                  aria-label="clear chat button"
-                />
-                 */}
-                <ChatButtonBloom />
+                  <CommandBarButton
+                    role="button"
+                    styles={{
+                      icon: {
+                        color: "#FFFFFF",
+                      },
+                      iconDisabled: {
+                        color: "#BDBDBD !important",
+                      },
+                      root: {
+                        color: "#FFFFFF",
+                        background:
+                          "radial-gradient(109.81% 107.82% at 100.1% 90.19%, #0F6CBD 33.63%, #2D87C3 70.31%, #8DDDD8 100%)",
+                      },
+                      rootDisabled: {
+                        background: "#F0F0F0",
+                      },
+                    }}
+                    className={
+                      appStateContext?.state.isCosmosDBAvailable?.status !==
+                      CosmosDBStatus.NotConfigured
+                        ? styles.clearChatBroom
+                        : styles.clearChatBroomNoCosmos
+                    }
+                    iconProps={{ iconName: "Broom" }}
+                    onClick={
+                      appStateContext?.state.isCosmosDBAvailable?.status !==
+                      CosmosDBStatus.NotConfigured
+                        ? clearChat
+                        : newChat
+                    }
+                    disabled={disabledButton()}
+                    aria-label="clear chat button"
+                  />*/}
+                {<ChatButtonBloom />}
 
                 {/* --------------- End of BLOOM button -------------- */}
                 <Dialog

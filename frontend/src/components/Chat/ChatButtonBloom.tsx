@@ -63,6 +63,9 @@ const ChatButtonBloom = () => {
       appStateContext?.state.isCosmosDBAvailable.cosmosDB
     ) {
       let response = await historyClear(appStateContext?.state.currentChat.id);
+      alert(response);
+      alert(response.ok);
+
       if (!response.ok) {
         /* setErrorMsg({
           title: "Error clearing current chat",
