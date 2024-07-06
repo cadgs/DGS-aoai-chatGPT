@@ -38,7 +38,15 @@ import { ChatStateContext } from "../../state/ChatProvider";
 //import { useBoolean } from "@fluentui/react-hooks";
 import { messageStatus } from "../../api/models";
 
-const ChatButtonBloom = () => {
+interface ChatButtonBloomProps {
+  disabledButton: () => boolean;
+  newChat: () => void;
+}
+
+const ChatButtonBloom: React.FC<ChatButtonBloomProps> = ({
+  disabledButton,
+  newChat,
+}) => {
   const appStateContext = useContext(AppStateContext);
   const chatStateContext = useContext(ChatStateContext);
 
@@ -116,7 +124,7 @@ const ChatButtonBloom = () => {
       payload: false,
     });
   };
-
+  /*
   const newChat = () => {
     //setProcessMessages(messageStatus.Processing);
     chatStateContext?.dispatch({
@@ -148,8 +156,8 @@ const ChatButtonBloom = () => {
       type: "PROCESS_MESSAGES",
       payload: messageStatus.Done,
     });
-  };
-
+  }; */
+  /*
   const disabledButton = () => {
     return (
       chatStateContext?.state.isLoading ||
@@ -159,7 +167,7 @@ const ChatButtonBloom = () => {
       appStateContext?.state.chatHistoryLoadingState ===
         ChatHistoryLoadingState.Loading
     );
-  };
+  }; */
 
   return (
     <CommandBarButton

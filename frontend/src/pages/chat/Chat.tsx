@@ -54,13 +54,17 @@ import { ChatHistoryPanel } from "../../components/ChatHistory/ChatHistoryPanel"
 import { AppStateContext } from "../../state/AppProvider";
 import { ChatStateContext } from "../../state/ChatProvider";
 import { useBoolean } from "@fluentui/react-hooks";
-import ChatButtonBloom from "../../components/Chat/ChatButtonBloom";
+import { messageStatus } from "../../api/models";
 
+import ChatButtonBloom from "../../components/Chat/ChatButtonBloom";
+import ChatButtonNewChat from "../../components/Chat/ChatButtonNewChat";
+
+/*
 const enum messageStatus {
   NotRunning = "Not Running",
   Processing = "Processing",
   Done = "Done",
-}
+}*/
 
 const Chat = () => {
   const appStateContext = useContext(AppStateContext);
@@ -88,7 +92,7 @@ const Chat = () => {
   const [processMessages, setProcessMessages] = useState<messageStatus>(
     messageStatus.NotRunning
   );
-  const [clearingChat, setClearingChat] = useState<boolean>(false);
+  //const [clearingChat, setClearingChat] = useState<boolean>(false);
   const [hideErrorDialog, { toggle: toggleErrorDialog }] = useBoolean(true);
   const [errorMsg, setErrorMsg] = useState<ErrorMessage | null>();
 
@@ -128,6 +132,7 @@ const Chat = () => {
     }
   }, [appStateContext?.state.isCosmosDBAvailable]);
 
+  // Add facade for chatStateContext function
   const setIsLoading = (isLoading: boolean) => {
     chatStateContext?.dispatch({
       type: "SET_LOADING",
@@ -135,6 +140,7 @@ const Chat = () => {
     });
   };
 
+  // Add facade for chatStateContext function
   const setMessages = (messages: ChatMessage[]) => {
     chatStateContext?.dispatch({
       type: "SET_MESSAGES",
@@ -647,7 +653,7 @@ const Chat = () => {
     return abortController.abort();
   };
   /* -------------- End of Make API Request With CosmoDB --------------*/
-
+  /*
   const clearChat = async () => {
     setClearingChat(true);
     if (
@@ -678,7 +684,8 @@ const Chat = () => {
     }
     setClearingChat(false);
   };
-
+*/
+  /*
   const newChat = () => {
     setProcessMessages(messageStatus.Processing);
     setMessages([]);
@@ -686,6 +693,38 @@ const Chat = () => {
     setActiveCitation(undefined);
     appStateContext?.dispatch({ type: "UPDATE_CURRENT_CHAT", payload: null });
     setProcessMessages(messageStatus.Done);
+  };*/
+  const newChat = () => {
+    //setProcessMessages(messageStatus.Processing);
+    chatStateContext?.dispatch({
+      type: "PROCESS_MESSAGES",
+      payload: messageStatus.Processing,
+    });
+
+    //setMessages([]);
+    chatStateContext?.dispatch({
+      type: "SET_MESSAGES",
+      payload: [],
+    });
+
+    //setIsCitationPanelOpen(false);
+    chatStateContext?.dispatch({
+      type: "SET_CITATION_PANEL_OPEN",
+      payload: false,
+    });
+
+    //setActiveCitation(undefined);
+    chatStateContext?.dispatch({
+      type: "SET_ACTIVE_CITATION",
+      payload: null,
+    });
+
+    appStateContext?.dispatch({ type: "UPDATE_CURRENT_CHAT", payload: null });
+    //setProcessMessages(messageStatus.Done);
+    chatStateContext?.dispatch({
+      type: "PROCESS_MESSAGES",
+      payload: messageStatus.Done,
+    });
   };
 
   const stopGenerating = () => {
@@ -806,8 +845,9 @@ const Chat = () => {
   const disabledButton = () => {
     return (
       chatStateContext?.state.isLoading ||
-      (messages && messages.length === 0) ||
-      clearingChat ||
+      (chatStateContext?.state.messages &&
+        chatStateContext?.state.messages.length === 0) ||
+      chatStateContext?.state.clearingChat ||
       appStateContext?.state.chatHistoryLoadingState ===
         ChatHistoryLoadingState.Loading
     );
@@ -934,6 +974,10 @@ const Chat = () => {
                 {appStateContext?.state.isCosmosDBAvailable?.status !==
                   CosmosDBStatus.NotConfigured && (
                   /* --------------- Start of START NEW CHAT button -------------- */
+                  /*
+                  ==========================================================================
+                  2024-07-06: refactor code to make new chat button a stand-alone component
+                  ==========================================================================
                   <CommandBarButton
                     role="button"
                     styles={{
@@ -958,10 +1002,18 @@ const Chat = () => {
                     disabled={disabledButton()}
                     aria-label="start a new chat button"
                   />
+                  */
+                  <ChatButtonNewChat
+                    disabledButton={disabledButton}
+                    newChat={newChat}
+                  />
                   /* --------------- End of START NEW CHAT button -------------- */
                 )}
                 {/* --------------- Start of BLOOM button -------------- */}
                 {/*
+                =======================================================================
+                2024-07-06: refactor code to make bloom button a stand-alone component
+                ========================================================================
                   <CommandBarButton
                     role="button"
                     styles={{
@@ -996,7 +1048,12 @@ const Chat = () => {
                     disabled={disabledButton()}
                     aria-label="clear chat button"
                   />*/}
-                {<ChatButtonBloom />}
+                {
+                  <ChatButtonBloom
+                    disabledButton={disabledButton}
+                    newChat={newChat}
+                  />
+                }
 
                 {/* --------------- End of BLOOM button -------------- */}
                 <Dialog
