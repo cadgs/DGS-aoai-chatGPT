@@ -1,42 +1,5 @@
-import {
-  useRef,
-  useState,
-  useEffect,
-  useContext,
-  useLayoutEffect,
-} from "react";
-
-import {
-  CommandBarButton,
-  IconButton,
-  Dialog,
-  DialogType,
-  Stack,
-} from "@fluentui/react";
-
-import {
-  ChatMessage,
-  ConversationRequest,
-  conversationApi,
-  Citation,
-  ToolMessageContent,
-  ChatResponse,
-  getUserInfo,
-  Conversation,
-  historyGenerate,
-  historyUpdate,
-  historyClear,
-  ChatHistoryLoadingState,
-  CosmosDBStatus,
-  ErrorMessage,
-} from "../../api";
-
+import { CommandBarButton } from "@fluentui/react";
 import styles from "./ChatButtonNewChat.module.css";
-
-import { AppStateContext } from "../../state/AppProvider";
-import { ChatStateContext } from "../../state/ChatProvider";
-//import { useBoolean } from "@fluentui/react-hooks";
-import { messageStatus } from "../../api/models";
 
 interface ChatButtonNewChatProps {
   disabledButton: () => boolean;
@@ -47,9 +10,6 @@ const ChatButtonNewChat: React.FC<ChatButtonNewChatProps> = ({
   disabledButton,
   newChat,
 }) => {
-  const appStateContext = useContext(AppStateContext);
-  const chatStateContext = useContext(ChatStateContext);
-
   return (
     <CommandBarButton
       role="button"

@@ -39,6 +39,7 @@ const Layout = () => {
     useState<string>("Hide chat history");
   const [showHistoryLabel, setShowHistoryLabel] =
     useState<string>("Show chat history");
+
   const appStateContext = useContext(AppStateContext);
   const ui = appStateContext?.state.frontendSettings?.ui;
 

@@ -36,7 +36,6 @@ import styles from "./ChatButtonBloom.module.css";
 import { AppStateContext } from "../../state/AppProvider";
 import { ChatStateContext } from "../../state/ChatProvider";
 //import { useBoolean } from "@fluentui/react-hooks";
-import { messageStatus } from "../../api/models";
 
 interface ChatButtonBloomProps {
   disabledButton: () => boolean;

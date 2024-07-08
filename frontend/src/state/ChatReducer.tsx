@@ -8,6 +8,8 @@ export const chatStateReducer = (
   switch (action.type) {
     case "SET_LOADING":
       return { ...state, isLoading: action.payload };
+    case "SET_SHOW_LOADING_MESSAGE":
+      return { ...state, showLoadingMessage: action.payload };
     case "SET_CLEARING_CHAT":
       return { ...state, clearingChat: action.payload };
     case "SET_ERR_MESSAGE":

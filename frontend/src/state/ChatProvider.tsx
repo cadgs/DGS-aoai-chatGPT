@@ -5,6 +5,7 @@ import { chatStateReducer } from "./ChatReducer";
 
 export interface ChatState {
   isLoading: boolean;
+  showLoadingMessage: boolean;
   clearingChat: boolean;
   errorMsg: ErrorMessage | null;
   hideErrorDialog: boolean;
@@ -16,6 +17,7 @@ export interface ChatState {
 
 const initialChatState: ChatState = {
   isLoading: false,
+  showLoadingMessage: false,
   clearingChat: false,
   errorMsg: null,
   hideErrorDialog: true,
@@ -27,8 +29,9 @@ const initialChatState: ChatState = {
 
 export type ChatAction =
   | { type: "SET_LOADING"; payload: boolean }
+  | { type: "SET_SHOW_LOADING_MESSAGE"; payload: boolean }
   | { type: "SET_CLEARING_CHAT"; payload: boolean }
-  | { type: "SET_ERR_MESSAGE"; payload: ErrorMessage }
+  | { type: "SET_ERR_MESSAGE"; payload: ErrorMessage | null }
   | { type: "TOGGLE_HIDE_ERR_DIALOG" }
   | { type: "SET_ACTIVE_CITATION"; payload: Citation | null }
   | { type: "SET_CITATION_PANEL_OPEN"; payload: boolean }
