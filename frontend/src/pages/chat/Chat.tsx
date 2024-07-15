@@ -26,11 +26,11 @@ import { isEmpty } from "lodash";
 import DOMPurify from "dompurify";
 
 import styles from "./Chat.module.css";
-import styles2 from "../../components/Auth/ChatAuth.module.css";
+import styles2 from "../../components/Chat/ChatAuth.module.css";
 
 import Contoso from "../../assets/Contoso.svg";
 import { XSSAllowTags } from "../../constants/xssAllowTags";
-import ChatAuth from "../../components/Auth/ChatAuth";
+import ChatAuth from "../../components/Chat/ChatAuth";
 
 import {
   ChatMessage,
@@ -65,13 +65,26 @@ const Chat = () => {
   const appStateContext = useContext(AppStateContext);
   const chatStateContext = useContext(ChatStateContext);
 
-  const messages = chatStateContext?.state.messages ?? [];
-
   const ui = appStateContext?.state.frontendSettings?.ui;
   const AUTH_ENABLED = appStateContext?.state.frontendSettings?.auth_enabled;
   const COSMOSDB_ENABLED = appStateContext?.state.isCosmosDBAvailable?.cosmosDB;
 
   const chatMessageStreamEnd = useRef<HTMLDivElement | null>(null);
+  const abortFuncs = useRef([] as AbortController[]);
+
+  /* 
+  ===============================================================
+  Add facade for chatStateContext function setMessages 
+  ===============================================================  
+  */
+  //const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const messages = chatStateContext?.state.messages ?? [];
+  const setMessages = (messages: ChatMessage[]) => {
+    chatStateContext?.dispatch({
+      type: "SET_MESSAGES",
+      payload: messages,
+    });
+  };
 
   /*
   ===============================================================
@@ -128,19 +141,17 @@ const Chat = () => {
     });
   };
 
-  const abortFuncs = useRef([] as AbortController[]);
-  const [showAuthMessage, setShowAuthMessage] = useState<boolean | undefined>();
-
   /* 
   ===============================================================
-  Add facade for chatStateContext function setMessages 
+  Add facade for chatStateContext function setShowAuthMessage 
   ===============================================================  
   */
-  //const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const setMessages = (messages: ChatMessage[]) => {
+  //const [showAuthMessage, setShowAuthMessage] = useState<boolean | undefined>();
+  const showAuthMessage = chatStateContext?.state.showAuthMessage;
+  const setShowAuthMessage = (showAuthMessage: boolean) => {
     chatStateContext?.dispatch({
-      type: "SET_MESSAGES",
-      payload: messages,
+      type: "SET_SHOW_AUTH_MESSAGE",
+      payload: showAuthMessage,
     });
   };
 

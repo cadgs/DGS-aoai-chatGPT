@@ -16,6 +16,8 @@ export const chatStateReducer = (
       return { ...state, errorMsg: action.payload };
     case "TOGGLE_HIDE_ERR_DIALOG":
       return { ...state, hideErrorDialog: !state.hideErrorDialog };
+    case "SET_SHOW_AUTH_MESSAGE":
+      return { ...state, showAuthMessage: action.payload };
     case "SET_ACTIVE_CITATION":
       return { ...state, activeCitation: action.payload };
     case "SET_CITATION_PANEL_OPEN":

@@ -9,6 +9,7 @@ export interface ChatState {
   clearingChat: boolean;
   errorMsg: ErrorMessage | null;
   hideErrorDialog: boolean;
+  showAuthMessage: boolean;
   activeCitation: Citation | null;
   isCitationPanelOpen: boolean;
   messages: ChatMessage[] | null;
@@ -21,6 +22,7 @@ const initialChatState: ChatState = {
   clearingChat: false,
   errorMsg: null,
   hideErrorDialog: true,
+  showAuthMessage: true,
   activeCitation: null,
   isCitationPanelOpen: false,
   messages: [],
@@ -33,6 +35,7 @@ export type ChatAction =
   | { type: "SET_CLEARING_CHAT"; payload: boolean }
   | { type: "SET_ERR_MESSAGE"; payload: ErrorMessage | null }
   | { type: "TOGGLE_HIDE_ERR_DIALOG" }
+  | { type: "SET_SHOW_AUTH_MESSAGE"; payload: boolean }
   | { type: "SET_ACTIVE_CITATION"; payload: Citation | null }
   | { type: "SET_CITATION_PANEL_OPEN"; payload: boolean }
   | { type: "SET_MESSAGES"; payload: ChatMessage[] | null } // API Call
