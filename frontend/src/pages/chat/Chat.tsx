@@ -59,13 +59,7 @@ import { messageStatus } from "../../api/models";
 import ChatButtonBloom from "../../components/Chat/ChatButtonBloom";
 import ChatButtonNewChat from "../../components/Chat/ChatButtonNewChat";
 import ChatCitationPanel from "../../components/Chat/ChatCitationPanel";
-
-/*
-const enum messageStatus {
-  NotRunning = "Not Running",
-  Processing = "Processing",
-  Done = "Done",
-}*/
+import ChatButtonStopGenerating from "../../components/Chat/ChatButtonStopGenerating";
 
 const Chat = () => {
   const appStateContext = useContext(AppStateContext);
@@ -955,30 +949,7 @@ const Chat = () => {
 
             <Stack horizontal className={styles.chatInput}>
               {chatStateContext?.state.isLoading && (
-                /* ------------- Begin of Stop Generating Button --------------*/
-                <Stack
-                  horizontal
-                  className={styles.stopGeneratingContainer}
-                  role="button"
-                  aria-label="Stop generating"
-                  tabIndex={0}
-                  onClick={stopGenerating}
-                  onKeyDown={(e) =>
-                    e.key === "Enter" || e.key === " " ? stopGenerating() : null
-                  }
-                >
-                  <SquareRegular
-                    className={styles.stopGeneratingIcon}
-                    aria-hidden="true"
-                  />
-                  <span
-                    className={styles.stopGeneratingText}
-                    aria-hidden="true"
-                  >
-                    Stop generating
-                  </span>
-                </Stack>
-                /* ------------- End of Stop Generating Button --------------*/
+                <ChatButtonStopGenerating stopGenerating={stopGenerating} />
               )}
               <Stack>
                 {appStateContext?.state.isCosmosDBAvailable?.status !==
@@ -1022,60 +993,7 @@ const Chat = () => {
           {messages &&
             messages.length > 0 &&
             isCitationPanelOpen &&
-            activeCitation && (
-              /*
-              <Stack.Item
-                className={styles.citationPanel}
-                tabIndex={0}
-                role="tabpanel"
-                aria-label="Citations Panel"
-              >
-                <Stack
-                  aria-label="Citations Panel Header Container"
-                  horizontal
-                  className={styles.citationPanelHeaderContainer}
-                  horizontalAlign="space-between"
-                  verticalAlign="center"
-                >
-                  <span
-                    aria-label="Citations"
-                    className={styles.citationPanelHeader}
-                  >
-                    Citations
-                  </span>
-                  <IconButton
-                    iconProps={{ iconName: "Cancel" }}
-                    aria-label="Close citations panel"
-                    onClick={() => setIsCitationPanelOpen(false)}
-                  />
-                </Stack>
-                <h5
-                  className={styles.citationPanelTitle}
-                  tabIndex={0}
-                  title={
-                    activeCitation.url &&
-                    !activeCitation.url.includes("blob.core")
-                      ? activeCitation.url
-                      : activeCitation.title ?? ""
-                  }
-                  onClick={() => onViewSource(activeCitation)}
-                >
-                  {activeCitation.title}
-                </h5>
-                <div tabIndex={0}>
-                  <ReactMarkdown
-                    linkTarget="_blank"
-                    className={styles.citationPanelContent}
-                    children={DOMPurify.sanitize(activeCitation.content, {
-                      ALLOWED_TAGS: XSSAllowTags,
-                    })}
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeRaw]}
-                  />
-                </div>
-              </Stack.Item> */
-              <ChatCitationPanel />
-            )}
+            activeCitation && <ChatCitationPanel />}
           {appStateContext?.state.isChatHistoryOpen &&
             appStateContext?.state.isCosmosDBAvailable?.status !==
               CosmosDBStatus.NotConfigured && <ChatHistoryPanel />}
