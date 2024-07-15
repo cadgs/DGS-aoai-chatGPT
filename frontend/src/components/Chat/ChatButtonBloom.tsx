@@ -6,7 +6,6 @@ import styles from "./ChatButtonBloom.module.css";
 
 import { AppStateContext } from "../../state/AppProvider";
 import { ChatStateContext } from "../../state/ChatProvider";
-//import { useBoolean } from "@fluentui/react-hooks";
 
 interface ChatButtonBloomProps {
   disabledButton: () => boolean;
@@ -20,17 +19,7 @@ const ChatButtonBloom: React.FC<ChatButtonBloomProps> = ({
   const appStateContext = useContext(AppStateContext);
   const chatStateContext = useContext(ChatStateContext);
 
-  //const [isLoading, setIsLoading] = useState<boolean>(false);
-  //const [clearingChat, setClearingChat] = useState<boolean>(false);
-  //const [errorMsg, setErrorMsg] = useState<ErrorMessage | null>();
-  //const [hideErrorDialog, { toggle: toggleErrorDialog }] = useBoolean(true);
-  //const [activeCitation, setActiveCitation] = useState<Citation>();
-  //const [isCitationPanelOpen, setIsCitationPanelOpen] =  useState<boolean>(false);
-  //const [messages, setMessages] = useState<ChatMessage[]>([]);
-  //const [processMessages, setProcessMessages] = useState<messageStatus>( messageStatus.NotRunning);
-
   const clearChat = async () => {
-    //setClearingChat(true);
     chatStateContext?.dispatch({
       type: "SET_CLEARING_CHAT",
       payload: true,
@@ -45,11 +34,6 @@ const ChatButtonBloom: React.FC<ChatButtonBloomProps> = ({
       alert(response.ok);
 
       if (!response.ok) {
-        /* setErrorMsg({
-          title: "Error clearing current chat",
-          subtitle:
-            "Please try again. If the problem persists, please contact the site administrator.",
-        }); */
         chatStateContext?.dispatch({
           type: "SET_ERR_MESSAGE",
           payload: {
@@ -58,7 +42,6 @@ const ChatButtonBloom: React.FC<ChatButtonBloomProps> = ({
               "Please try again. If the problem persists, please contact the site administrator.",
           },
         });
-        //toggleErrorDialog();
         chatStateContext?.dispatch({ type: "TOGGLE_HIDE_ERR_DIALOG" });
       } else {
         appStateContext?.dispatch({
@@ -69,75 +52,27 @@ const ChatButtonBloom: React.FC<ChatButtonBloomProps> = ({
           type: "UPDATE_CHAT_HISTORY",
           payload: appStateContext?.state.currentChat,
         });
-        //setActiveCitation(undefined);
         chatStateContext?.dispatch({
           type: "SET_ACTIVE_CITATION",
           payload: null,
         });
 
-        //setIsCitationPanelOpen(false);
         chatStateContext?.dispatch({
           type: "SET_CITATION_PANEL_OPEN",
           payload: false,
         });
 
-        //setMessages([]);
         chatStateContext?.dispatch({
           type: "SET_MESSAGES",
           payload: [],
         });
       }
     }
-    // setClearingChat(false);
     chatStateContext?.dispatch({
       type: "SET_CLEARING_CHAT",
       payload: false,
     });
   };
-  /*
-  const newChat = () => {
-    //setProcessMessages(messageStatus.Processing);
-    chatStateContext?.dispatch({
-      type: "PROCESS_MESSAGES",
-      payload: messageStatus.Processing,
-    });
-
-    //setMessages([]);
-    chatStateContext?.dispatch({
-      type: "SET_MESSAGES",
-      payload: [],
-    });
-
-    //setIsCitationPanelOpen(false);
-    chatStateContext?.dispatch({
-      type: "SET_CITATION_PANEL_OPEN",
-      payload: false,
-    });
-
-    //setActiveCitation(undefined);
-    chatStateContext?.dispatch({
-      type: "SET_ACTIVE_CITATION",
-      payload: null,
-    });
-
-    appStateContext?.dispatch({ type: "UPDATE_CURRENT_CHAT", payload: null });
-    //setProcessMessages(messageStatus.Done);
-    chatStateContext?.dispatch({
-      type: "PROCESS_MESSAGES",
-      payload: messageStatus.Done,
-    });
-  }; */
-  /*
-  const disabledButton = () => {
-    return (
-      chatStateContext?.state.isLoading ||
-      (chatStateContext?.state.messages &&
-        chatStateContext?.state.messages.length === 0) ||
-      chatStateContext?.state.clearingChat ||
-      appStateContext?.state.chatHistoryLoadingState ===
-        ChatHistoryLoadingState.Loading
-    );
-  }; */
 
   return (
     <CommandBarButton
