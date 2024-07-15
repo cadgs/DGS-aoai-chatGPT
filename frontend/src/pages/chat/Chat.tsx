@@ -60,6 +60,7 @@ import ChatButtonBloom from "../../components/Chat/ChatButtonBloom";
 import ChatButtonNewChat from "../../components/Chat/ChatButtonNewChat";
 import ChatCitationPanel from "../../components/Chat/ChatCitationPanel";
 import ChatButtonStopGenerating from "../../components/Chat/ChatButtonStopGenerating";
+import ChatErrorDialog from "../../components/Chat/ChatErrorDialog";
 
 const Chat = () => {
   const appStateContext = useContext(AppStateContext);
@@ -169,6 +170,7 @@ const Chat = () => {
     });
   };
 
+  // setClearingChat has been moved into component ChatButtonBloom.
   //const [clearingChat, setClearingChat] = useState<boolean>(false);
 
   /* 
@@ -198,20 +200,6 @@ const Chat = () => {
     });
   };
 
-  const errorDialogContentProps = {
-    type: DialogType.close,
-    title: errorMsg?.title,
-    closeButtonAriaLabel: "Close",
-    subText: errorMsg?.subtitle,
-  };
-
-  const modalProps = {
-    titleAriaId: "labelId",
-    subtitleAriaId: "subTextId",
-    isBlocking: true,
-    styles: { main: { maxWidth: 450 } },
-  };
-
   const [ASSISTANT, TOOL, ERROR] = ["assistant", "tool", "error"];
   const NO_CONTENT_ERROR = "No content in messages object.";
 
@@ -233,13 +221,6 @@ const Chat = () => {
       toggleErrorDialog();
     }
   }, [appStateContext?.state.isCosmosDBAvailable]);
-
-  const handleErrorDialogClose = () => {
-    toggleErrorDialog();
-    setTimeout(() => {
-      setErrorMsg(null);
-    }, 500);
-  };
 
   useEffect(() => {
     setIsLoading(
@@ -976,12 +957,7 @@ const Chat = () => {
                     newChat={newChat}
                   />
                 }
-                <Dialog
-                  hidden={hideErrorDialog}
-                  onDismiss={handleErrorDialogClose}
-                  dialogContentProps={errorDialogContentProps}
-                  modalProps={modalProps}
-                ></Dialog>
+                <ChatErrorDialog />
               </Stack>
               <QuestionInput
                 clearOnSend
