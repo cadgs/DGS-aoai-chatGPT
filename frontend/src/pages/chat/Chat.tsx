@@ -39,11 +39,9 @@ import {
   Citation,
   ToolMessageContent,
   ChatResponse,
-  getUserInfo,
   Conversation,
   historyGenerate,
   historyUpdate,
-  historyClear,
   ChatHistoryLoadingState,
   CosmosDBStatus,
   ErrorMessage,
@@ -67,8 +65,9 @@ const Chat = () => {
   const chatStateContext = useContext(ChatStateContext);
 
   const ui = appStateContext?.state.frontendSettings?.ui;
-  const AUTH_ENABLED = appStateContext?.state.frontendSettings?.auth_enabled;
-  const COSMOSDB_ENABLED = appStateContext?.state.isCosmosDBAvailable?.cosmosDB;
+  const showAuthMessage = chatStateContext?.state.showAuthMessage;
+  //const AUTH_ENABLED = appStateContext?.state.frontendSettings?.auth_enabled;
+  //const COSMOSDB_ENABLED = appStateContext?.state.isCosmosDBAvailable?.cosmosDB;
 
   const chatMessageStreamEnd = useRef<HTMLDivElement | null>(null);
   const abortFuncs = useRef([] as AbortController[]);
@@ -144,20 +143,6 @@ const Chat = () => {
 
   /* 
   ===============================================================
-  Add facade for chatStateContext function setShowAuthMessage 
-  ===============================================================  
-  */
-  //const [showAuthMessage, setShowAuthMessage] = useState<boolean | undefined>();
-  const showAuthMessage = chatStateContext?.state.showAuthMessage;
-  const setShowAuthMessage = (showAuthMessage: boolean) => {
-    chatStateContext?.dispatch({
-      type: "SET_SHOW_AUTH_MESSAGE",
-      payload: showAuthMessage,
-    });
-  };
-
-  /* 
-  ===============================================================
   Add facade for chatStateContext function setProcessMessages 
   ===============================================================  
   */
@@ -228,24 +213,6 @@ const Chat = () => {
         ChatHistoryLoadingState.Loading
     );
   }, [appStateContext?.state.chatHistoryLoadingState]);
-
-  const getUserInfoList = async () => {
-    if (!AUTH_ENABLED) {
-      setShowAuthMessage(false);
-      return;
-    }
-    const userInfoList = await getUserInfo();
-
-    if (
-      userInfoList.length === 0 &&
-      window.location.hostname !== "127.0.0.1" &&
-      window.location.hostname !== "localhost"
-    ) {
-      setShowAuthMessage(true);
-    } else {
-      setShowAuthMessage(false);
-    }
-  };
 
   let assistantMessage = {} as ChatMessage;
   let toolMessage = {} as ChatMessage;
@@ -803,10 +770,6 @@ const Chat = () => {
       setProcessMessages(messageStatus.NotRunning);
     }
   }, [processMessages]);
-
-  useEffect(() => {
-    if (AUTH_ENABLED !== undefined) getUserInfoList();
-  }, [AUTH_ENABLED]);
 
   useLayoutEffect(() => {
     chatMessageStreamEnd.current?.scrollIntoView({ behavior: "smooth" });

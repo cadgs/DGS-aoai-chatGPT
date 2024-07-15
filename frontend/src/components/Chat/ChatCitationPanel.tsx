@@ -1,34 +1,7 @@
-import {
-  useRef,
-  useState,
-  useEffect,
-  useContext,
-  useLayoutEffect,
-} from "react";
-import {
-  CommandBarButton,
-  IconButton,
-  Dialog,
-  DialogType,
-  Stack,
-} from "@fluentui/react";
+import { useContext } from "react";
+import { IconButton, Stack } from "@fluentui/react";
 
-import {
-  ChatMessage,
-  ConversationRequest,
-  conversationApi,
-  Citation,
-  ToolMessageContent,
-  ChatResponse,
-  getUserInfo,
-  Conversation,
-  historyGenerate,
-  historyUpdate,
-  historyClear,
-  ChatHistoryLoadingState,
-  CosmosDBStatus,
-  ErrorMessage,
-} from "../../api";
+import { Citation } from "../../api";
 
 import DOMPurify from "dompurify";
 import remarkGfm from "remark-gfm";
@@ -43,7 +16,7 @@ const ChatCitationPanel = () => {
   const chatStateContext = useContext(ChatStateContext);
   const activeCitation = chatStateContext?.state.activeCitation;
 
-  const isCitationPanelOpen = chatStateContext?.state.isCitationPanelOpen;
+  // Add facade for chatStateContext function setIsCitationPanelOpen
   const setIsCitationPanelOpen = (isCitationPanelOpen: boolean) => {
     chatStateContext?.dispatch({
       type: "SET_CITATION_PANEL_OPEN",

@@ -1,23 +1,5 @@
-import {
-  useRef,
-  useState,
-  useEffect,
-  useContext,
-  useLayoutEffect,
-} from "react";
-import {
-  CommandBarButton,
-  IconButton,
-  Dialog,
-  DialogType,
-  Stack,
-} from "@fluentui/react";
-
-import {
-  SquareRegular,
-  ShieldLockRegular,
-  ErrorCircleRegular,
-} from "@fluentui/react-icons";
+import { Stack } from "@fluentui/react";
+import { SquareRegular } from "@fluentui/react-icons";
 
 import styles from "./ChatButtonStopGenerating.module.css";
 

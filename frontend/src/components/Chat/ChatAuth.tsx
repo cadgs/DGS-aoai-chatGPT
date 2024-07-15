@@ -1,8 +1,49 @@
+import { useEffect, useContext } from "react";
 import { Stack } from "@fluentui/react";
+import { getUserInfo } from "../../api";
+
 import { ShieldLockRegular } from "@fluentui/react-icons";
 import styles from "./ChatAuth.module.css";
 
+import { AppStateContext } from "../../state/AppProvider";
+import { ChatStateContext } from "../../state/ChatProvider";
+
 const ChatAuth = () => {
+  const appStateContext = useContext(AppStateContext);
+  const chatStateContext = useContext(ChatStateContext);
+
+  const AUTH_ENABLED = appStateContext?.state.frontendSettings?.auth_enabled;
+
+  // Add facade for chatStateContext function setShowAuthMessage
+  const setShowAuthMessage = (showAuthMessage: boolean) => {
+    chatStateContext?.dispatch({
+      type: "SET_SHOW_AUTH_MESSAGE",
+      payload: showAuthMessage,
+    });
+  };
+
+  const getUserInfoList = async () => {
+    if (!AUTH_ENABLED) {
+      setShowAuthMessage(false);
+      return;
+    }
+    const userInfoList = await getUserInfo();
+
+    if (
+      userInfoList.length === 0 &&
+      window.location.hostname !== "127.0.0.1" &&
+      window.location.hostname !== "localhost"
+    ) {
+      setShowAuthMessage(true);
+    } else {
+      setShowAuthMessage(false);
+    }
+  };
+
+  useEffect(() => {
+    if (AUTH_ENABLED !== undefined) getUserInfoList();
+  }, [AUTH_ENABLED]);
+
   return (
     <Stack className={styles.chatEmptyState}>
       <ShieldLockRegular

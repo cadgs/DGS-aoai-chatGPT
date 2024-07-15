@@ -1,35 +1,6 @@
-import {
-  useRef,
-  useState,
-  useEffect,
-  useContext,
-  useLayoutEffect,
-} from "react";
-
-import {
-  CommandBarButton,
-  IconButton,
-  Dialog,
-  DialogType,
-  Stack,
-} from "@fluentui/react";
-
-import {
-  ChatMessage,
-  ConversationRequest,
-  conversationApi,
-  Citation,
-  ToolMessageContent,
-  ChatResponse,
-  getUserInfo,
-  Conversation,
-  historyGenerate,
-  historyUpdate,
-  historyClear,
-  ChatHistoryLoadingState,
-  CosmosDBStatus,
-  ErrorMessage,
-} from "../../api";
+import { useContext } from "react";
+import { CommandBarButton } from "@fluentui/react";
+import { historyClear, CosmosDBStatus } from "../../api";
 
 import styles from "./ChatButtonBloom.module.css";
 
