@@ -1,0 +1,71 @@
+.buttonInitQuestion {
+	position: relative;
+	display: flex;
+	width: 10rem; /* 40 * 0.25rem (assuming a base unit of 0.25rem) */
+	flex-direction: column;
+	gap: 0.5rem; /* 2 * 0.25rem */
+	border-radius: 1rem; /* 2xl usually corresponds to 1rem, though it can vary */
+	border-width: 1px;
+	border-color: #d1d5db; /* Example color for a light border */
+	padding-left: 0.75rem; /* 3 * 0.25rem */
+  	padding-right: 0.75rem;
+  	padding-bottom: 1rem; /* 4 * 0.25rem */
+  	padding-top: 0.75rem; /* 3 * 0.25rem */
+    height: 120px;
+  	text-align: start;
+  	vertical-align: top;
+  	font-size: 15px;
+  	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Example of an extra small shadow */
+  	transition: all 0.2s ease-in-out;
+    color: var(--primary-text-color);
+    background: var(--ask-background-color);
+}
+
+.buttonInitQuestion.enabled:hover:bg-token-main-surface-secondary:enabled:hover {
+  /*background-color: #e5e7eb;*/ /* Example color for hover state */
+  background: var(--ask-background-color);
+}
+
+.buttonInitQuestion.disabled:cursor-not-allowed:disabled {
+  cursor: not-allowed;
+}
+
+.buttonInitQuestionText {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  max-width: 100%;
+  text-align: justify;
+  /*color: #4b5563;*/ /* Example color for gray-600 */
+  color: var(--primary-text-color);
+  word-break: break-word;
+}
+
+.iconMd1 {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    color: rgb(226, 197, 65);
+}
+
+.iconMd2 {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    color: rgb(237, 98, 98);
+}
+
+.iconMd3 {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    color: rgb(118, 208, 235);
+}
+
+.iconMd4 {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    color: rgb(203, 139, 208);
+}
