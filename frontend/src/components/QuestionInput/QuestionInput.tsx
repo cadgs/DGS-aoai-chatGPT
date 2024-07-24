@@ -1,10 +1,11 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Stack, TextField, isDark } from "@fluentui/react";
 import { SendRegular } from "@fluentui/react-icons";
 import { AppStateContext } from "../../state/AppProvider";
 import useLocalStorage from "use-local-storage";
 import Send from "../../assets/Send.svg";
 import styles from "./QuestionInput.module.css";
+import { ChatStateContext } from "../../state/ChatProvider";
 
 interface Props {
   onSend: (question: string, id?: string) => void;
@@ -21,6 +22,10 @@ export const QuestionInput = ({
   clearOnSend,
   conversationId,
 }: Props) => {
+  // allow user to send init questions by clicking Init Question buttons
+  const chatStateContext = useContext(ChatStateContext);
+  const initQuestion = chatStateContext?.state.initQuestion;
+
   const [question, setQuestion] = useState<string>("");
 
   //const appStateContext = useContext(AppStateContext);
@@ -28,6 +33,15 @@ export const QuestionInput = ({
 
   const preference = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [isDark, setIsDark] = useLocalStorage("isDark", preference);
+
+  useEffect(() => {
+    if (initQuestion != "") {
+      //setQuestion(initQuestion || "");
+      //sendQuestion();
+      onSend(initQuestion || "");
+      //setQuestion("");
+    }
+  }, [initQuestion]);
 
   const sendQuestion = () => {
     if (disabled || !question.trim()) {

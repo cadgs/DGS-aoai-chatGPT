@@ -164,7 +164,11 @@ const Chat = () => {
               <ChatAnswer />
             )}
 
-            <ChatInitQuestionList />
+            {!messages || messages.length < 1 ? (
+              <ChatInitQuestionList />
+            ) : (
+              <div />
+            )}
 
             <Stack horizontal className={styles.chatInput}>
               {chatStateContext?.state.isLoading && (

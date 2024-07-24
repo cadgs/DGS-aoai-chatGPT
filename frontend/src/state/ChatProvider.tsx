@@ -14,6 +14,7 @@ export interface ChatState {
   isCitationPanelOpen: boolean;
   messages: ChatMessage[] | null;
   processMessages: messageStatus | null;
+  initQuestion: string;
 }
 
 const initialChatState: ChatState = {
@@ -27,6 +28,7 @@ const initialChatState: ChatState = {
   isCitationPanelOpen: false,
   messages: [],
   processMessages: messageStatus.NotRunning,
+  initQuestion: "",
 };
 
 export type ChatAction =
@@ -39,7 +41,8 @@ export type ChatAction =
   | { type: "SET_ACTIVE_CITATION"; payload: Citation | null }
   | { type: "SET_CITATION_PANEL_OPEN"; payload: boolean }
   | { type: "SET_MESSAGES"; payload: ChatMessage[] | null } // API Call
-  | { type: "PROCESS_MESSAGES"; payload: messageStatus };
+  | { type: "PROCESS_MESSAGES"; payload: messageStatus }
+  | { type: "SET_INIT_QUESTION"; payload: string };
 
 export const ChatStateContext = createContext<
   | {

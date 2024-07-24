@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import styles from "./ChatInitQuestion.module.css";
+import { ChatStateContext } from "../../state/ChatProvider";
+import { CommandBarButton, DefaultButton } from "@fluentui/react";
 
 interface ChatInitQuestionProps {
   iconDrawing: string;
@@ -13,8 +16,17 @@ const ChatInitQuestion: React.FC<ChatInitQuestionProps> = ({
   questionText,
   iconMd,
 }) => {
+  const chatStateContext = useContext(ChatStateContext);
+
+  const setInitQuestion = () => {
+    chatStateContext?.dispatch({
+      type: "SET_INIT_QUESTION",
+      payload: questionText,
+    });
+  };
+
   return (
-    <button className={styles.buttonInitQuestion}>
+    <button className={styles.buttonInitQuestion} onClick={setInitQuestion}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

@@ -26,6 +26,8 @@ export const chatStateReducer = (
       return { ...state, messages: action.payload };
     case "PROCESS_MESSAGES":
       return { ...state, processMessages: action.payload };
+    case "SET_INIT_QUESTION":
+      return { ...state, initQuestion: action.payload };
     default:
       return state;
   }
