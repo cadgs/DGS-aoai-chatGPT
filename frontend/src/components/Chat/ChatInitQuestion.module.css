@@ -36,7 +36,7 @@
   -webkit-line-clamp: 3;
   overflow: hidden;
   max-width: 100%;
-  text-align: justify;
+  /*text-align: justify;*/
   /*color: #4b5563;*/ /* Example color for gray-600 */
   color: var(--primary-text-color);
   word-break: break-word;
