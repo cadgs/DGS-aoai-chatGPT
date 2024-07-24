@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import styles from "./ChatInitQuestion.module.css";
 import { ChatStateContext } from "../../state/ChatProvider";
-import { CommandBarButton, DefaultButton } from "@fluentui/react";
 
 interface ChatInitQuestionProps {
   iconDrawing: string;
