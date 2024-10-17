@@ -63,8 +63,10 @@ export const Guideline = () => {
             >
               <p>
                 The security and privacy of our consumer, employee and partner
-                information is a top priority. Please follow these important
-                guidelines to ensure your interaction with GenAI remains secure
+                information is a top priority. Your use of this ChatBot is subject
+                to existing policies and procedures on the acceptable use of State
+                information assets, including the <a href="https://cadgs.sharepoint.com/sites/DGS-AI-Program-Project/SitePages/DGS-GenAI-User-Guidelines.aspx">DGS GenAI User Guidelines.</a>  
+                Especially, to ensure your interaction with GenAI remains secure
                 and confidential:
               </p>
               <ol>
@@ -75,23 +77,16 @@ export const Guideline = () => {
                 </li>
                 <li>
                   <b>DO NOT</b> use any personally identifiable information
-                  (PII), personal health inforamtion (PHI), federal tax
+                  (PII), personal health information (PHI), federal tax
                   information (FTI), or other non-public, sensitive, or
                   confidential information as input into any GenAI tool.{" "}
                 </li>
                 <li>
                   <b>DO NOT</b> depend on or share content from a GenAI tool
-                  before reviewing and fact-checking it. GenAI content should
+                  without reviewing and fact-checking it. GenAI content should
                   support, not replace, your work product.
                 </li>
               </ol>
-              <p>
-                This tool aims to support state entities in self-assessing risk
-                levels, collaborating with control agencies on higher-risk use
-                cases, and documenting and sharing learnings throughout GenAI
-                experimentation. It is designed to evolve based on user feedback
-                and evolving best practices in GenAI.
-              </p>
               <p>
                 Please note that this is a living resource and may be updated
                 over time to meet the needs of state staff navigating the
