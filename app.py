@@ -49,7 +49,7 @@ UI_CHAT_DESCRIPTION = (
 UI_FAVICON = os.environ.get("UI_FAVICON") or "/dgs_logo.png"
 UI_SHOW_SHARE_BUTTON = os.environ.get("UI_SHOW_SHARE_BUTTON", "true").lower() == "true"
 UI_SHOW_FEEDBACK_BUTTON = os.environ.get("UI_SHOW_FEEDBACK_BUTTON", "true").lower() == "true"
-UI_FEEDBACK_URL = (os.environ.get("UI_SHOW_FEEDBACK_BUTTON") or 'https://chat.dgs.ca.gov')  # find out how to get the host name on the fly
+UI_FEEDBACK_URL = (os.environ.get("UI_FEEDBACK_URL") or 'https://chat.dgs.ca.gov')  # find out how to get the host name on the fly
 UI_LONG_ANSWER = os.environ.get("UI_LONG_ANSWER", "true").lower() == "true"
 UI_LONG_ANSWER_TOKEN = (os.environ.get("UI_LONG_ANSWER_TOKEN") or 1000) 
 UI_SHORT_ANSWER_TOKEN = (os.environ.get("UI_SHORT_ANSWER_TOKEN") or 400)
@@ -78,9 +78,9 @@ async def favicon():
 async def dgs_logo():
     return await bp.send_static_file("dgs_logo.jpg")
 
-@bp.route("/dgs_chat_logo.png")
-async def dgs_chat_logo():
-    return await bp.send_static_file("dgs_chat_logo.png")
+@bp.route("/dgs_main_logo.png")
+async def dgs_main_logo():
+    return await bp.send_static_file("dgs_main_logo.png")
 
 
 @bp.route("/assets/<path:path>")

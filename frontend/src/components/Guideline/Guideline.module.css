@@ -2,8 +2,8 @@
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    height: 350px;
-    width: 500px;
+    height: auto; /* Auto height based on content */
+    width: 500px; /* Default width for larger screens */
     color: var(--primary-text-color);
     border: 1px solid #FFFFFF;
     border-radius: 4px;
@@ -24,28 +24,31 @@
 }
 .guidelineContainer {
     color: var(--primary-text-color);
-    height: 375px;
-    width: 500px;
+    height: auto; /* Auto height based on content */
+    max-width: 500px; /* Default width for larger screens */
+    width: 100%;
     padding: 2px 10px;
     background-color: var(--guideline-background-color);
     border: 1px solid #808080;
     border-radius: 4px;
     border-style:solid;
-    overflow-y: scroll;
-    overflow-x: scroll;
+    overflow-y: hidden;
+    overflow-x: visible;
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
-.guidelineMobileContainer {
-    color: var(--primary-text-color);
-    height: 200px;
-    width: 220px;
-    padding: 2px 10px;
-    background-color: var(--guideline-background-color);
-    border: 1px solid #808080;
-    border-radius: 4px;
-    border-style:solid;
-    overflow-y: scroll;
+.guidelineContainer a {
+    color: var(--link-color); /* Set the default color for links */
+    text-decoration: none; /* Remove underline if desired */
+}
+
+.guidelineContainer a:visited {
+    color: #9370DB; /* Muted Purple for visited links */
+}
+
+.guidelineContainer a:hover {
+    color: var(--link-hover-color); /* Set the color for links on hover */
+    text-decoration: underline; /* Add underline on hover if desired */
 }
 
 .guidelineButtonContainer {
@@ -65,4 +68,23 @@
     border: 1px solid #D1D1D1;
     border-radius: 4px;
     cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .guidelinesBox {
+        width: 100vw;
+        height: auto; /* Adjusts automatically based on content */
+        padding: 0px;
+    }
+
+    .guidelineContainer {
+        width: 100%;
+        padding: 10px;
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .guidelineButtonContainer {
+        width: calc(100% - 20px);
+    }
 }

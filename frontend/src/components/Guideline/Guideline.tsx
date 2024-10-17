@@ -30,13 +30,17 @@ export const Guideline = () => {
           {
             selectors: {
               ["@media (min-width: 600px)"]: {
-                maxWidth: isMobile ? "120px" : "600px",
-                minWidth: isMobile ? "100px" : "550px",
+                maxWidth: "600px",
+                minWidth: "600px", // Match maxWidth to avoid conflict
                 background: isDark ? "#2D2D2D" : "#FFFFFF",
                 color: isDark ? "#FFFFFF" : "#2D2D2D",
                 borderRadius: "8px",
-                maxHeight: isMobile ? "220px" : "600px",
-                minHeight: isMobile ? "200px" : "550px",
+                maxHeight: "600px",
+                minHeight: "550px",
+              },
+              ["@media (max-width: 600px)"]: {
+                maxWidth: "90vw", // More flexible for smaller screens
+                minWidth: "80vw",
               },
             },
           },
@@ -55,12 +59,7 @@ export const Guideline = () => {
               <p>By using DGS AI Chat, you agree to the following</p>
             </div>
             <div
-              className={
-                isMobile
-                  ? styles.guidelineMobileContainer
-                  : styles.guidelineContainer
-              }
-            >
+              className={styles.guidelineContainer}>
               <p>
                 The security and privacy of our consumer, employee and partner
                 information is a top priority. Your use of this ChatBot is subject

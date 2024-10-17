@@ -49,13 +49,13 @@ const Layout = () => {
 
   const handleFeedbackClick = () => {
     // Feedback form URL
-    // const feedbackURL = ui?.feedback_url;
-    // window.open(feedbackURL, "_blank");
+    const feedbackURL = ui?.feedback_url;
+    window.open(feedbackURL, "_blank");
     // alert(feedbackURL);
-    window.open(
-      "https://forms.office.com/Pages/ResponsePage.aspx?id=sfdF6tcHqEm49TcTbsk4Lf9zgloA4zJBq3X6bgkEGcFUNDJESkdJS1pRTEJQSk84UlFMVzBXMVZWSS4u",
-      "_blank"
-    );
+    //window.open(
+    //  "https://forms.office.com/Pages/ResponsePage.aspx?id=sfdF6tcHqEm49TcTbsk4Lf9zgloA4zJBq3X6bgkEGcFUNDJESkdJS1pRTEJQSk84UlFMVzBXMVZWSS4u",
+    //  "_blank"
+    //);
   };
 
   /*
