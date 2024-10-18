@@ -143,8 +143,17 @@
     left: 7px;
     top: 13px;
     color: #FFFFFF;
+    background-color: #0078d4; /* Set a background color */
     border-radius: 4px;
-    z-index: 1;
+    z-index: 1000;
+    border: 1px solid #ccc;
+    opacity: 1; /* Ensure it's fully visible */
+    visibility: visible; /* Make sure it’s visible */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
+}
+
+.clearChatBroom:hover {
+    opacity: 0.8; /* Optional hover effect */
 }
 
 .clearChatBroomNoCosmos {

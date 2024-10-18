@@ -79,7 +79,7 @@ const ChatButtonBloom: React.FC<ChatButtonBloomProps> = ({
       role="button"
       styles={{
         icon: {
-          color: "#FFFFFF",
+          color: "#000000",
         },
         iconDisabled: {
           color: "#BDBDBD !important",
