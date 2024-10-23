@@ -40,6 +40,8 @@
 .guidelineContainer a {
     color: var(--link-color); /* Set the default color for links */
     text-decoration: none; /* Remove underline if desired */
+    border: none; /* Ensure no border on links */
+    background: transparent; /* Ensure no background on links */
 }
 
 .guidelineContainer a:visited {
@@ -49,6 +51,10 @@
 .guidelineContainer a:hover {
     color: var(--link-hover-color); /* Set the color for links on hover */
     text-decoration: underline; /* Add underline on hover if desired */
+}
+
+.guidelineContainer a:focus {
+    outline: none; /* Remove focus outline */
 }
 
 .guidelineButtonContainer {

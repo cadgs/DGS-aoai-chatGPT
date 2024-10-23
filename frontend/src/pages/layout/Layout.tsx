@@ -126,10 +126,12 @@ const Layout = () => {
             tokens={{ childrenGap: 4 }}
             className={styles.shareButtonContainer}
           >
+            {/*
             <LongShortAnswerSwitch
               isChecked={isLongAnswer}
               handleChange={() => setIsLongAnswer(!isLongAnswer)}
-            />
+            />*/}
+
             {appStateContext?.state.isCosmosDBAvailable?.status !==
               CosmosDBStatus.NotConfigured && (
               <HistoryButton

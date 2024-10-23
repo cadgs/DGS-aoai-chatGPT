@@ -47,7 +47,7 @@ export const Guideline = () => {
         ],
       }}
       dialogContentProps={{
-        title: "GenAI Guidelines",
+        title: "DGS AI Chat - Acknowledgment",
         showCloseButton: false,
         titleProps: { className: styles.titleCenterText },
       }}
