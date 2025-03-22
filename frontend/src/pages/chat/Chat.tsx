@@ -5,6 +5,7 @@ import styles from "./Chat.module.css";
 import styles2 from "../../components/Chat/ChatAuth.module.css";
 
 import Contoso from "../../assets/Contoso.svg";
+import Blank from "../../assets/Blank.jpg";
 import ChatAuth from "../../components/Chat/ChatAuth";
 
 import {
@@ -148,11 +149,7 @@ const Chat = () => {
           <div className={styles.chatContainer}>
             {!messages || messages.length < 1 ? (
               <Stack className={styles2.chatEmptyState}>
-                <img
-                  src={ui?.chat_logo ? ui.chat_logo : Contoso}
-                  className={styles.chatIcon}
-                  aria-hidden="true"
-                />
+
                 <h1 className={styles2.chatEmptyStateTitle}>
                   {ui?.chat_title}
                 </h1>
