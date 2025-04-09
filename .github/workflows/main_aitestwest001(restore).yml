@@ -68,4 +68,4 @@ jobs:
         with:
           app-name: 'aitestwest001'
           slot-name: 'Restore'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_50353048050E415C918E403D04927981 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_52A989481C1D4E64951C8482B64013CB }}
