@@ -47,7 +47,7 @@ export const Guideline = () => {
         ],
       }}
       dialogContentProps={{
-        title: "DGS AI Chat - Acknowledgment",
+        title: "DGS Chat - Acknowledgment",
         showCloseButton: false,
         titleProps: { className: styles.titleCenterText },
       }}
@@ -56,7 +56,7 @@ export const Guideline = () => {
         <>
           <div>
             <div className={styles.centerText}>
-              <p>By using DGS AI Chat, you agree to the following</p>
+              <p>By using DGS Chat, you agree to the following</p>
             </div>
             <div
               className={styles.guidelineContainer}>
